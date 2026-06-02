@@ -1,0 +1,6 @@
+// Directorio reservado para pruebas unitarias (mínimo 3 requeridas)
+// Ejemplo de estructura:
+//   tests/
+//   ├── auth.service.test.ts
+//   ├── receta.service.test.ts
+//   └── comentario.service.test.ts

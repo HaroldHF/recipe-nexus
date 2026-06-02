@@ -1,0 +1,39 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": "./src",                       /* ✨ Activado: Dónde está tu código TypeScript */
+    "outDir": "./dist",                       /* ✨ Activado: Dónde se guardará el JS compilado para producción */
+
+    /* Environment Settings */
+    "module": "nodenext",
+    "moduleResolution": "nodenext",          /* Añadido para que resuelva paquetes modernos de Node */
+    "target": "es2022",                       /* Cambiado esnext a es2022 para asegurar estabilidad en Node 20+ */
+    "lib": ["es2022"],                        /* Añadido soporte para librerías nativas modernas */
+    "types": ["node"],                        /* ✨ Corregido: Permite usar process.env y tipos globales de Node */
+
+    /* Other Outputs */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* Stricter Typechecking Options */
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Style Options (Opcionales pero muy recomendados para ingenieria) */
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,                   /* Te avisa si dejas variables declaradas sin usar */
+    "noUnusedParameters": true,               /* Te avisa si dejas parámetros en funciones sin usar */
+    "noFallthroughCasesInSwitch": true,
+
+    /* Recommended Options */
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"]                     /* ✨ Añadido: Le dice a TS que solo compile lo que está dentro de src */
+}
