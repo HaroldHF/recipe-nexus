@@ -10,7 +10,8 @@ export async function getRecetaById(id: string) {
 }
 
 export async function createReceta(data: CrearRecetaDto, autorId: string) {
-  return Receta.create({ ...data, autor: autorId });
+  const receta = new Receta({ ...data, autor: autorId });
+  return receta.save();
 }
 
 export async function updateReceta(id: string, data: EditarRecetaDto, autorId: string) {

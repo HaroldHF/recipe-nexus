@@ -1,0 +1,29 @@
+# Dependencias y artefactos de build (se generan dentro de la imagen)
+node_modules
+dist
+
+# Variables de entorno y secretos — nunca dentro de la imagen
+.env
+.env.*
+
+# Tests
+tests
+*.test.ts
+*.spec.ts
+*.test.mjs
+coverage
+
+# Metadatos de Git y documentación
+.git
+.gitignore
+README.md
+arquitectura.md
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+
+# El propio Dockerfile / compose no necesitan copiarse al contexto de build
+Dockerfile
+.dockerignore
+docker-compose.yml

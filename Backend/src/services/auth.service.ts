@@ -3,6 +3,16 @@ import jwt from "jsonwebtoken";
 import { Usuario } from "../models/usuario.model.js";
 import type { RegisterDto, LoginDto } from "../validators/auth.validator.js";
 
+// Forma pública del usuario — nunca expone el hash de la contraseña.
+function toPublicUsuario(usuario: InstanceType<typeof Usuario>) {
+  return {
+    _id: usuario._id,
+    nombre: usuario.nombre,
+    email: usuario.email,
+    avatar: usuario.avatar,
+  };
+}
+
 export async function register(data: RegisterDto) {
   const existe = await Usuario.findOne({ email: data.email });
   if (existe) throw new Error("El email ya está registrado");
@@ -10,7 +20,7 @@ export async function register(data: RegisterDto) {
   const hash = await bcrypt.hash(data.password, 10);
   const usuario = await Usuario.create({ ...data, password: hash });
 
-  return usuario;
+  return toPublicUsuario(usuario);
 }
 
 export async function login(data: LoginDto) {
@@ -20,8 +30,12 @@ export async function login(data: LoginDto) {
   const coincide = await bcrypt.compare(data.password, usuario.password as string);
   if (!coincide) throw new Error("Credenciales inválidas");
 
-  const secret = process.env.JWT_SECRET ?? "";
-  const token = jwt.sign({ id: usuario._id }, secret, { expiresIn: "7d" });
+  const secret = process.env.JWT_SECRET as string;
+  const token = jwt.sign(
+    { id: usuario._id.toString(), email: usuario.email },
+    secret,
+    { expiresIn: "7d" }
+  );
 
-  return { token, usuario };
+  return { token, usuario: toPublicUsuario(usuario) };
 }
