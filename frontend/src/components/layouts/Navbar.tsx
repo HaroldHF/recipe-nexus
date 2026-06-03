@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { ROUTES } from "../../constants/routes";
 import { SearchIcon, PlusIcon, UserIcon, LogoutIcon } from "../shared/Icons";
+import { Avatar } from "../shared/Avatar";
 
 export function Navbar() {
   const { usuario, logout } = useAuthContext();
@@ -26,10 +27,6 @@ export function Navbar() {
     logout();
     navigate(ROUTES.INICIO);
   }
-
-  const initials = usuario
-    ? usuario.nombre.split(" ").map((w) => w[0]).slice(0, 2).join("")
-    : "";
 
   return (
     <header className="nav">
@@ -73,9 +70,7 @@ export function Navbar() {
             </button>
             <div style={{ position: "relative" }} ref={menuRef}>
               <button className="av-btn" onClick={() => setMenuOpen((o) => !o)}>
-                <span className="avatar" style={{ width: 38, height: 38, fontSize: 15 }}>
-                  {initials}
-                </span>
+                <Avatar usuario={usuario} size={38} />
               </button>
               {menuOpen && (
                 <div className="menu">

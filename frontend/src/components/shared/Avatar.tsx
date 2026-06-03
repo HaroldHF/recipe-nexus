@@ -6,10 +6,10 @@ interface AvatarProps {
 }
 
 export function Avatar({ usuario, size = 36 }: AvatarProps) {
-  if (usuario.avatar) {
+  if (usuario.avatarUrl) {
     return (
       <img
-        src={usuario.avatar}
+        src={usuario.avatarUrl}
         alt={usuario.nombre}
         style={{ width: size, height: size }}
         className="rounded-full object-cover"

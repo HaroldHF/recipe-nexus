@@ -1,5 +1,6 @@
 import type { Receta, Usuario } from "../../types";
 import { ClockIcon, FlameIcon, UsersIcon } from "../shared/Icons";
+import { Avatar } from "../shared/Avatar";
 
 const GRADIENTS: Record<string, string> = {
   Desayuno: "linear-gradient(140deg, #fde9c8, #f9c279)",
@@ -24,8 +25,12 @@ export function RecetaInfo({ receta, onEditar, esAutor }: RecetaInfoProps) {
     <>
       {/* Hero image */}
       <div className="d-hero">
-        <div className="ph-img" style={{ background: gradiente }}>
-          <span className="ph-cap">{receta.titulo}</span>
+        <div className="ph-img" style={receta.imagenUrl ? undefined : { background: gradiente }}>
+          {receta.imagenUrl ? (
+            <img src={receta.imagenUrl} alt={receta.titulo} />
+          ) : (
+            <span className="ph-cap">{receta.titulo}</span>
+          )}
         </div>
       </div>
 
@@ -77,9 +82,7 @@ export function RecetaInfo({ receta, onEditar, esAutor }: RecetaInfoProps) {
       {/* Author */}
       {autor && typeof autor === "object" && (
         <div className="author-card" style={{ marginTop: 12 }}>
-          <span className="avatar" style={{ width: 54, height: 54, fontSize: 22, borderRadius: 14 }}>
-            {autor.nombre.charAt(0).toUpperCase()}
-          </span>
+          <Avatar usuario={autor} size={54} />
           <div className="meta">
             <div className="nm">{autor.nombre}</div>
             <div className="bio">{autor.email}</div>

@@ -28,6 +28,7 @@ const recetaSchema = new Schema(
     autor: { type: Types.ObjectId, ref: "Usuario", required: true },
     categoria: { type: String, default: "General" },
     tiempoPrep: { type: Number },
+    imagenUrl: { type: String, default: "" },
   },
   { timestamps: true }
 );

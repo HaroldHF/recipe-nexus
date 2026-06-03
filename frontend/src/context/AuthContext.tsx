@@ -1,14 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import type { Usuario } from "../types";
-
-interface AuthContextValue {
-  usuario: Usuario | null;
-  token: string | null;
-  login: (token: string, usuario: Usuario) => void;
-  logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
+import { AuthContext } from "./authContextValue";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
@@ -36,8 +28,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuthContext() {
-  return useContext(AuthContext);
 }

@@ -2,11 +2,11 @@ import { Receta } from "../models/receta.model.js";
 import type { CrearRecetaDto, EditarRecetaDto } from "../validators/receta.validator.js";
 
 export async function getAllRecetas() {
-  return Receta.find().populate("autor", "nombre avatar").sort({ createdAt: -1 });
+  return Receta.find().populate("autor", "nombre avatarUrl").sort({ createdAt: -1 });
 }
 
 export async function getRecetaById(id: string) {
-  return Receta.findById(id).populate("autor", "nombre avatar");
+  return Receta.findById(id).populate("autor", "nombre avatarUrl");
 }
 
 export async function createReceta(data: CrearRecetaDto, autorId: string) {

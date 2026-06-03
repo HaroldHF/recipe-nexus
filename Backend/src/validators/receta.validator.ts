@@ -18,6 +18,7 @@ export const crearRecetaSchema = z.object({
   pasos: z.array(pasoSchema).min(1, "Agrega al menos un paso"),
   categoria: z.string().optional(),
   tiempoPrep: z.number().int().positive().optional(),
+  imagenUrl: z.string().url().optional(),
 });
 
 export const editarRecetaSchema = crearRecetaSchema.partial();

@@ -13,7 +13,7 @@ export interface Usuario {
   _id: string;
   nombre: string;
   email: string;
-  avatar?: string;
+  avatarUrl?: string;
 }
 
 export interface Receta {
@@ -25,6 +25,7 @@ export interface Receta {
   autor: Usuario | string;
   categoria: string;
   tiempoPrep?: number;
+  imagenUrl?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -55,4 +56,5 @@ export interface RecetaFormDTO {
   pasos: Paso[];
   categoria?: string;
   tiempoPrep?: number;
+  imagenUrl?: string;
 }

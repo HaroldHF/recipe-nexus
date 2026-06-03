@@ -27,6 +27,7 @@ export function FormNuevaReceta({
   const [descripcion, setDescripcion] = useState(defaultValues?.descripcion ?? "");
   const [categoria, setCategoria] = useState(defaultValues?.categoria ?? "Almuerzo");
   const [tiempoPrep, setTiempoPrep] = useState<number | "">(defaultValues?.tiempoPrep ?? 30);
+  const [imagenUrl, setImagenUrl] = useState(defaultValues?.imagenUrl ?? "");
   const [ingredientes, setIngredientes] = useState<Ingrediente[]>(
     defaultValues?.ingredientes?.length
       ? defaultValues.ingredientes.map((i) => ({ ...i }))
@@ -72,6 +73,7 @@ export function FormNuevaReceta({
       descripcion: descripcion.trim(),
       categoria,
       tiempoPrep: tiempoPrep === "" ? undefined : Number(tiempoPrep),
+      imagenUrl: imagenUrl.trim() || undefined,
       ingredientes: ingredientes.filter((i) => i.nombre.trim()),
       pasos: pasos.filter((p) => p.descripcion.trim()),
     });
@@ -113,6 +115,24 @@ export function FormNuevaReceta({
               placeholder="Una o dos frases que describan el plato…"
             />
             {errs.desc && <div className="field-err">{errs.desc}</div>}
+          </div>
+
+          <div className="field">
+            <label className="label">Imagen <span className="opt">(opcional)</span></label>
+            <input
+              className="input"
+              type="text"
+              value={imagenUrl}
+              onChange={(e) => setImagenUrl(e.target.value)}
+              placeholder="URL de imagen (opcional)"
+            />
+            {imagenUrl.trim() && (
+              <img
+                src={imagenUrl}
+                alt="Vista previa"
+                style={{ marginTop: 10, width: "100%", maxHeight: 220, objectFit: "cover", borderRadius: 12 }}
+              />
+            )}
           </div>
 
           <div className="row row-3">

@@ -2,7 +2,7 @@ import { Comentario } from "../models/comentario.model.js";
 
 export async function getComentariosByReceta(recetaId: string) {
   return Comentario.find({ receta: recetaId })
-    .populate("autor", "nombre avatar")
+    .populate("autor", "nombre avatarUrl")
     .sort({ createdAt: -1 });
 }
 

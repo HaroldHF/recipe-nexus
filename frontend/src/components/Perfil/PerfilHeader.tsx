@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Usuario } from "../../types";
 import { ROUTES } from "../../constants/routes";
 import { PlusIcon, EditIcon } from "../shared/Icons";
+import { Avatar } from "../shared/Avatar";
 
 interface PerfilHeaderProps {
   usuario: Usuario;
@@ -9,8 +10,6 @@ interface PerfilHeaderProps {
 }
 
 export function PerfilHeader({ usuario, totalRecetas }: PerfilHeaderProps) {
-  const initials = usuario.nombre.split(" ").map((w) => w[0]).slice(0, 2).join("");
-
   return (
     <>
       {/* Full-bleed cover */}
@@ -21,7 +20,7 @@ export function PerfilHeader({ usuario, totalRecetas }: PerfilHeaderProps) {
 
       <div className="container">
         <div className="p-head">
-          <span className="p-avatar">{initials}</span>
+          <Avatar usuario={usuario} size={124} />
           <div className="p-info">
             <div className="nm">{usuario.nombre}</div>
             <div className="handle">@{usuario.email.split("@")[0]}</div>

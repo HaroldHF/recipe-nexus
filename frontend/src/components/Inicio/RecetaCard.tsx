@@ -38,8 +38,12 @@ export function RecetaCard({ receta }: RecetaCardProps) {
   return (
     <Link to={buildRoute.detalle(receta._id)} className="r-card fade-in">
       <div className="img-wrap">
-        <div className="ph-img" style={{ background: getGradient(receta.categoria) }}>
-          <span className="ph-cap">{receta.titulo}</span>
+        <div className="ph-img" style={receta.imagenUrl ? undefined : { background: getGradient(receta.categoria) }}>
+          {receta.imagenUrl ? (
+            <img src={receta.imagenUrl} alt={receta.titulo} />
+          ) : (
+            <span className="ph-cap">{receta.titulo}</span>
+          )}
           <span className="badge">{receta.categoria}</span>
           <button
             className="fav"

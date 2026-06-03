@@ -9,7 +9,7 @@ function toPublicUsuario(usuario: InstanceType<typeof Usuario>) {
     _id: usuario._id,
     nombre: usuario.nombre,
     email: usuario.email,
-    avatar: usuario.avatar,
+    avatarUrl: usuario.avatarUrl,
   };
 }
 
@@ -20,6 +20,12 @@ export async function register(data: RegisterDto) {
   const hash = await bcrypt.hash(data.password, 10);
   const usuario = await Usuario.create({ ...data, password: hash });
 
+  return toPublicUsuario(usuario);
+}
+
+export async function getMe(id: string) {
+  const usuario = await Usuario.findById(id);
+  if (!usuario) return null;
   return toPublicUsuario(usuario);
 }
 
