@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RecipeHub · Variaciones de Inicio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+
+  /* ---------- shared palette ---------- */
+  :root {
+    --cream:    #f7f1e7;
+    --cream-2:  #f1e8da;
+    --paper:    #fffdf9;
+    --ink:      #2b251d;
+    --ink-soft: #6f6557;
+    --muted:    #9a8f7e;
+    --line:     #e7dcc9;
+    --terra:    #bd6b40;
+    --terra-d:  #9c5430;
+    --terra-soft:#e9d7c6;
+    --gold:     #c79a4f;
+  }
+
+  .home { width: 1280px; background: var(--cream); color: var(--ink); }
+  .home .wrap { padding: 44px 56px 56px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+  .star-row { display: flex; align-items: center; gap: 2px; }
+  .star-row svg { width: 15px; height: 15px; }
+  .ph-img { position: relative; overflow: hidden; }
+  .ph-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ph-cap { position: absolute; left: 10px; bottom: 9px; font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: .04em; color: rgba(255,255,255,.92); text-shadow: 0 1px 4px rgba(0,0,0,.4); z-index: 1; }
+
+  /* ===================================================== */
+  /* VARIATION A — Editorial cálido                        */
+  /* ===================================================== */
+  .vA { font-family: "Hanken Grotesk", sans-serif; }
+  .vA .nav { display: flex; align-items: center; gap: 28px; height: 74px; padding: 0 56px; border-bottom: 1px solid var(--line); background: var(--cream); }
+  .vA .brand { font-family: "Newsreader", serif; font-weight: 600; font-size: 25px; letter-spacing: -.01em; }
+  .vA .brand b { color: var(--terra); }
+  .vA .nav-links { display: flex; gap: 26px; margin-left: 14px; }
+  .vA .nav-links a { font-size: 14.5px; color: var(--ink-soft); text-decoration: none; font-weight: 500; }
+  .vA .nav-links a.active { color: var(--ink); }
+  .vA .nav-spacer { flex: 1; }
+  .vA .search { display: flex; align-items: center; gap: 9px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; width: 230px; color: var(--muted); font-size: 13.5px; }
+  .vA .btn-login { border: 1px solid var(--terra); color: var(--terra); background: transparent; border-radius: 999px; padding: 9px 20px; font-size: 14px; font-weight: 600; font-family: inherit; }
+
+  .vA .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--terra); font-weight: 600; }
+  .vA .h1 { font-family: "Newsreader", serif; font-weight: 500; font-size: 46px; line-height: 1.02; letter-spacing: -.015em; margin: 12px 0 0; max-width: 640px; }
+  .vA .lede { color: var(--ink-soft); font-size: 16px; margin-top: 14px; max-width: 480px; line-height: 1.5; }
+  .vA .filters { display: flex; align-items: center; gap: 8px; margin: 34px 0 30px; flex-wrap: wrap; }
+  .vA .cat { font-size: 14px; color: var(--ink-soft); padding: 7px 4px; font-weight: 500; border-bottom: 2px solid transparent; }
+  .vA .cat.on { color: var(--ink); border-color: var(--terra); }
+  .vA .sep { width: 1px; height: 22px; background: var(--line); margin: 0 12px; }
+  .vA .diff { font-size: 13px; color: var(--ink-soft); border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 6px 14px; font-weight: 500; }
+
+  .vA .card .ph-img { height: 226px; border-radius: 6px; }
+  .vA .card .cat-tag { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--terra); font-weight: 600; margin-top: 16px; }
+  .vA .card h3 { font-family: "Newsreader", serif; font-weight: 500; font-size: 23px; line-height: 1.12; letter-spacing: -.01em; margin: 7px 0 0; }
+  .vA .card .meta { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 13.5px; margin-top: 11px; }
+  .vA .card .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+  .vA .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .vA .card .rate { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--ink); font-weight: 600; }
+  .vA .card .author { font-size: 12.5px; color: var(--muted); }
+
+  /* ===================================================== */
+  /* VARIATION B — App moderna                             */
+  /* ===================================================== */
+  .vB { font-family: "Hanken Grotesk", sans-serif; }
+  .vB .nav { display: flex; align-items: center; gap: 22px; height: 74px; padding: 0 56px; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .vB .logo-mark { width: 34px; height: 34px; border-radius: 10px; background: var(--terra); color: #fff; display: grid; place-items: center; font-family: "Schibsted Grotesk"; font-weight: 800; font-size: 19px; }
+  .vB .brand { font-family: "Schibsted Grotesk", sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -.02em; }
+  .vB .nav-links { display: flex; gap: 4px; margin-left: 16px; }
+  .vB .nav-links a { font-size: 14px; color: var(--ink-soft); text-decoration: none; font-weight: 600; padding: 8px 14px; border-radius: 999px; }
+  .vB .nav-links a.active { color: var(--terra-d); background: var(--terra-soft); }
+  .vB .nav-spacer { flex: 1; }
+  .vB .search { display: flex; align-items: center; gap: 9px; background: var(--cream-2); border: 1px solid transparent; border-radius: 12px; padding: 10px 16px; width: 250px; color: var(--muted); font-size: 13.5px; }
+  .vB .btn-login { background: var(--terra); color: #fff; border: none; border-radius: 12px; padding: 11px 20px; font-size: 14px; font-weight: 700; font-family: inherit; }
+
+  .vB .hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .vB .h1 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 800; font-size: 40px; line-height: 1.04; letter-spacing: -.03em; margin: 0; }
+  .vB .h1 span { color: var(--terra); }
+  .vB .lede { color: var(--ink-soft); font-size: 15.5px; margin: 12px 0 0; max-width: 440px; line-height: 1.5; }
+  .vB .count { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .vB .filters { display: flex; align-items: center; gap: 9px; margin: 30px 0 28px; flex-wrap: wrap; }
+  .vB .chip { font-size: 13.5px; color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 9px 17px; font-weight: 600; }
+  .vB .chip.on { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .vB .seg { display: flex; background: var(--cream-2); border-radius: 999px; padding: 3px; margin-left: auto; }
+  .vB .seg span { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); padding: 7px 14px; border-radius: 999px; }
+  .vB .seg span.on { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+  .vB .card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 18px rgba(80,55,30,.05); }
+  .vB .card .ph-img { height: 188px; }
+  .vB .card .badge { position: absolute; top: 12px; left: 12px; z-index: 1; background: rgba(255,253,249,.94); color: var(--ink); font-size: 11.5px; font-weight: 700; padding: 5px 11px; border-radius: 999px; }
+  .vB .card .heart { position: absolute; top: 12px; right: 12px; z-index: 1; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,253,249,.94); display: grid; place-items: center; }
+  .vB .card .body { padding: 16px 17px 17px; }
+  .vB .card .cat-tag { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--terra); }
+  .vB .card h3 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -.01em; margin: 6px 0 0; line-height: 1.18; }
+  .vB .card .meta { display: flex; align-items: center; gap: 14px; color: var(--ink-soft); font-size: 13px; margin-top: 11px; font-weight: 500; }
+  .vB .card .meta .ic { display: flex; align-items: center; gap: 5px; }
+  .vB .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
+  .vB .card .rate { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700; color: var(--ink); }
+  .vB .card .rate b { color: var(--gold); }
+  .vB .card .author { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+  .vB .card .av { width: 22px; height: 22px; border-radius: 50%; background: var(--terra-soft); }
+
+  /* ===================================================== */
+  /* VARIATION C — Artesanal / editorial mono              */
+  /* ===================================================== */
+  .vC { font-family: "Spectral", serif; }
+  .vC .nav { display: flex; align-items: center; gap: 28px; height: 78px; padding: 0 56px; background: var(--cream); border-bottom: 1.5px solid var(--ink); }
+  .vC .brand { line-height: 1; }
+  .vC .brand .bn { font-family: "Spectral", serif; font-weight: 600; font-size: 24px; letter-spacing: .01em; }
+  .vC .brand .bt { font-family: "Space Mono", monospace; font-size: 9.5px; letter-spacing: .22em; color: var(--ink-soft); text-transform: uppercase; margin-top: 3px; }
+  .vC .nav-links { display: flex; gap: 24px; margin-left: 18px; }
+  .vC .nav-links a { font-family: "Space Mono", monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
+  .vC .nav-links a.active { color: var(--terra); }
+  .vC .nav-spacer { flex: 1; }
+  .vC .search { display: flex; align-items: center; gap: 9px; border: 1.5px solid var(--ink); padding: 8px 14px; width: 210px; color: var(--muted); font-family: "Space Mono", monospace; font-size: 11.5px; letter-spacing: .04em; }
+  .vC .btn-login { border: 1.5px solid var(--ink); background: var(--ink); color: var(--cream); padding: 9px 18px; font-family: "Space Mono", monospace; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+  .vC .head { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 1.5px solid var(--ink); padding-bottom: 22px; }
+  .vC .eyebrow { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--terra); }
+  .vC .h1 { font-family: "Spectral", serif; font-weight: 500; font-size: 50px; line-height: 1; letter-spacing: -.01em; margin: 14px 0 0; }
+  .vC .h1 i { font-style: italic; color: var(--terra); }
+  .vC .meta-r { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: .08em; color: var(--ink-soft); text-align: right; line-height: 1.7; }
+  .vC .filters { display: flex; align-items: center; gap: 0; margin: 24px 0 30px; font-family: "Space Mono", monospace; }
+  .vC .cat { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 16px; border: 1px solid var(--line); border-right: none; }
+  .vC .cat:last-of-type { border-right: 1px solid var(--line); }
+  .vC .cat.on { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .vC .diff-lbl { margin-left: auto; font-size: 11px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+
+  .vC .card { border: 1.5px solid var(--ink); background: var(--paper); }
+  .vC .card .ph-img { height: 200px; border-bottom: 1.5px solid var(--ink); }
+  .vC .card .body { padding: 16px 18px 18px; }
+  .vC .card .top { display: flex; align-items: baseline; justify-content: space-between; }
+  .vC .card .idx { font-family: "Spectral", serif; font-size: 14px; color: var(--terra); }
+  .vC .card .cat-tag { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  .vC .card h3 { font-family: "Spectral", serif; font-weight: 500; font-size: 22px; line-height: 1.12; margin: 9px 0 0; }
+  .vC .card .rule { height: 1px; background: var(--line); margin: 14px 0 11px; }
+  .vC .card .meta { display: flex; justify-content: space-between; font-family: "Space Mono", monospace; font-size: 10.5px; letter-spacing: .04em; color: var(--ink-soft); }
+  .vC .card .meta b { color: var(--ink); display: block; font-weight: 700; margin-top: 3px; }
+  .vC .card .rate { display: flex; align-items: center; gap: 7px; margin-top: 13px; }
+  .vC .card .rate .num { font-family: "Spectral", serif; font-size: 18px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+const RECIPES = [
+  { t:"Tostada de aguacate y huevo", cat:"Desayuno", time:"15 min", diff:"Fácil",  rate:4.8, author:"Lucía Fernández", tone:["#cdd6ad","#9aa86a"], cap:"Tostada de aguacate", img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=640&q=70" },
+  { t:"Pasta al pesto genovés",      cat:"Almuerzo", time:"25 min", diff:"Media",  rate:4.6, author:"Marco Ruiz",      tone:["#c8d2a0","#8a9c58"], cap:"Pasta al pesto",     img:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=640&q=70" },
+  { t:"Ensalada mediterránea",       cat:"Almuerzo", time:"10 min", diff:"Fácil",  rate:4.5, author:"Sara Navarro",    tone:["#cdd9b4","#92a866"], cap:"Ensalada fresca",    img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=640&q=70" },
+  { t:"Tarta de manzana clásica",    cat:"Postre",   time:"60 min", diff:"Difícil",rate:4.9, author:"Diego Méndez",    tone:["#e8c98a","#c69850"], cap:"Tarta de manzana",   img:"https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?w=640&q=70" },
+  { t:"Curry de garbanzos y coco",   cat:"Cena",     time:"35 min", diff:"Media",  rate:4.7, author:"Paula Vidal",     tone:["#e6b074","#c47c3c"], cap:"Curry de garbanzos", img:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=640&q=70" },
+  { t:"Tortitas con arándanos",      cat:"Desayuno", time:"20 min", diff:"Fácil",  rate:4.8, author:"Tomás Gil",       tone:["#edc585","#cf9a4d"], cap:"Tortitas",           img:"https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=640&q=70" },
+];
+
+function Star({ fill }) {
+  return (
+    <svg viewBox="0 0 24 24" fill={fill ? "var(--gold)" : "none"} stroke={fill ? "var(--gold)" : "#cbbfa9"} strokeWidth="1.5">
+      <path d="M12 17.3l-5.4 3 1-6-4.4-4.3 6.1-.9L12 3l2.7 5.6 6.1.9-4.4 4.3 1 6z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function Stars({ rate }) {
+  const n = Math.round(rate);
+  return <span className="star-row">{[1,2,3,4,5].map(i => <Star key={i} fill={i <= n} />)}</span>;
+}
+function PhImg({ r, h, children }) {
+  return (
+    <div className="ph-img" style={{ background:`linear-gradient(140deg, ${r.tone[0]}, ${r.tone[1]})` }}>
+      <img src={r.img} alt={r.t} onError={(e)=>{ e.target.style.display='none'; }} />
+      <span className="ph-cap">{r.cap}</span>
+      {children}
+    </div>
+  );
+}
+const Ico = {
+  search: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>,
+  clock: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>,
+  flame: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3c1 3-2 4-2 7a2 2 0 004 0c2 2 3 3 3 6a5 5 0 01-10 0c0-4 5-6 5-13z"/></svg>,
+  heart: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bd6b40" strokeWidth="2"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></svg>,
+};
+
+/* ---------- Variation A ---------- */
+function HomeA() {
+  return (
+    <div className="home vA">
+      <div className="nav">
+        <div className="brand">Recipe<b>Hub</b></div>
+        <div className="nav-links"><a className="active">Inicio</a><a>Explorar</a><a>Nueva receta</a></div>
+        <div className="nav-spacer"></div>
+        <div className="search">{Ico.search}<span>Buscar recetas…</span></div>
+        <button className="btn-login">Iniciar sesión</button>
+      </div>
+      <div className="wrap">
+        <div className="eyebrow">Recetas de la comunidad</div>
+        <h1 className="h1">Cocina algo memorable esta noche.</h1>
+        <p className="lede">Una colección cuidada de recetas caseras, compartidas y puntuadas por personas que cocinan de verdad.</p>
+        <div className="filters">
+          <span className="cat on">Todas</span><span className="cat">Desayuno</span><span className="cat">Almuerzo</span><span className="cat">Cena</span><span className="cat">Postre</span>
+          <span className="sep"></span>
+          <span className="diff">Cualquier dificultad ⌄</span>
+        </div>
+        <div className="grid3">
+          {RECIPES.map((r, i) => (
+            <div className="card" key={i}>
+              <PhImg r={r} />
+              <div className="cat-tag">{r.cat}</div>
+              <h3>{r.t}</h3>
+              <div className="meta"><span>{r.time}</span><span className="dot"></span><span>{r.diff}</span></div>
+              <div className="foot">
+                <span className="rate"><Stars rate={r.rate} /> {r.rate.toFixed(1)}</span>
+                <span className="author">por {r.author}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Variation B ---------- */
+function HomeB() {
+  return (
+    <div className="home vB">
+      <div className="nav">
+        <div className="logo-mark">R</div>
+        <div className="brand">RecipeHub</div>
+        <div className="nav-links"><a className="active">Inicio</a><a>Explorar</a><a>Mis recetas</a></div>
+        <div className="nav-spacer"></div>
+        <div className="search">{Ico.search}<span>Buscar recetas, ingredientes…</span></div>
+        <button className="btn-login">Iniciar sesión</button>
+      </div>
+      <div className="wrap">
+        <div className="hero">
+          <div>
+            <h1 className="h1">¿Qué cocinamos <span>hoy?</span></h1>
+            <p className="lede">Descubre, guarda y comparte recetas. Filtra por momento del día y dificultad.</p>
+          </div>
+          <div className="count">248 recetas · 1.2k cocineros</div>
+        </div>
+        <div className="filters">
+          <span className="chip on">Todas</span><span className="chip">Desayuno</span><span className="chip">Almuerzo</span><span className="chip">Cena</span><span className="chip">Postre</span>
+          <span className="seg"><span className="on">Toda dificultad</span><span>Fácil</span><span>Media</span><span>Difícil</span></span>
+        </div>
+        <div className="grid3">
+          {RECIPES.map((r, i) => (
+            <div className="card" key={i}>
+              <PhImg r={r}>
+                <span className="badge">{r.diff}</span>
+                <span className="heart">{Ico.heart}</span>
+              </PhImg>
+              <div className="body">
+                <div className="cat-tag">{r.cat}</div>
+                <h3>{r.t}</h3>
+                <div className="meta"><span className="ic">{Ico.clock}{r.time}</span><span className="ic">{Ico.flame}{r.diff}</span></div>
+                <div className="foot">
+                  <span className="rate"><b>★</b> {r.rate.toFixed(1)} <span style={{color:'var(--muted)',fontWeight:500}}>(124)</span></span>
+                  <span className="author"><span className="av"></span>{r.author.split(' ')[0]}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Variation C ---------- */
+function HomeC() {
+  return (
+    <div className="home vC">
+      <div className="nav">
+        <div className="brand"><div className="bn">RecipeHub</div><div className="bt">Cocina colaborativa</div></div>
+        <div className="nav-links"><a className="active">Inicio</a><a>Recetas</a><a>Crear</a></div>
+        <div className="nav-spacer"></div>
+        <div className="search">{Ico.search}<span>BUSCAR…</span></div>
+        <button className="btn-login">Entrar</button>
+      </div>
+      <div className="wrap">
+        <div className="head">
+          <div>
+            <div className="eyebrow">El recetario abierto · Nº 04</div>
+            <h1 className="h1">Recetas con <i>alma</i> casera.</h1>
+          </div>
+          <div className="meta-r">248 RECETAS<br/>62 COCINEROS<br/>ACTUALIZADO HOY</div>
+        </div>
+        <div className="filters">
+          <span className="cat on">Todas</span><span className="cat">Desayuno</span><span className="cat">Almuerzo</span><span className="cat">Cena</span><span className="cat">Postre</span>
+          <span className="diff-lbl">Dificultad: Todas</span>
+        </div>
+        <div className="grid3">
+          {RECIPES.map((r, i) => (
+            <div className="card" key={i}>
+              <PhImg r={r} />
+              <div className="body">
+                <div className="top">
+                  <span className="idx">{String(i+1).padStart(2,'0')}</span>
+                  <span className="cat-tag">{r.cat}</span>
+                </div>
+                <h3>{r.t}</h3>
+                <div className="rule"></div>
+                <div className="meta">
+                  <span>TIEMPO<b>{r.time.toUpperCase()}</b></span>
+                  <span>DIFICULTAD<b>{r.diff.toUpperCase()}</b></span>
+                  <span>AUTOR<b>{r.author.split(' ')[0].toUpperCase()}</b></span>
+                </div>
+                <div className="rate"><span className="num">{r.rate.toFixed(1)}</span><Stars rate={r.rate} /></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection id="home" title="Inicio · 3 direcciones visuales" subtitle="Misma paleta terracota + crema · distinta tipografía y layout">
+        <DCArtboard id="a" label="A · Editorial cálido — serif Newsreader" width={1280} height={1264}><HomeA /></DCArtboard>
+        <DCArtboard id="b" label="B · App moderna — sans Schibsted" width={1280} height={1248}><HomeB /></DCArtboard>
+        <DCArtboard id="c" label="C · Artesanal — serif Spectral + mono" width={1280} height={1268}><HomeC /></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

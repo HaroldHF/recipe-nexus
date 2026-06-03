@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuthContext } from "../context/AuthContext";
 import { ROUTES } from "../constants/routes";
-import { PageLoader } from "../components/PageLoader"; // Spinner de carga
+import { PageLoader } from "../components/PageLoader";
 
 export function ProtectedRoute() {
-  //const { isAuthenticated, loading } = useAuth();
-  //if (loading) return <PageLoader />;
-  // Si está autenticado, lo deja pasar a la vista interna; si no, lo manda al Login
-  // return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.LOGIN} replace />;
+  const { token } = useAuthContext();
+
+  if (token === undefined) return <PageLoader />;
+  return token ? <Outlet /> : <Navigate to={ROUTES.LOGIN} replace />;
 }
