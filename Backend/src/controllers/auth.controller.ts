@@ -20,3 +20,13 @@ export async function login(req: Request, res: Response): Promise<void> {
     res.status(401).json({ message: msg });
   }
 }
+
+export async function me(req: Request, res: Response): Promise<void> {
+  try {
+    const usuario = await authService.getMe(req.usuario!.id);
+    if (!usuario) { res.status(404).json({ message: "Usuario no encontrado" }); return; }
+    res.json({ usuario });
+  } catch {
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+}

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
+import { MainLayout } from "../components/layouts/MainLayout";
 import { Inicio } from "../pages/Inicio";
 import { LoginRegister } from "../pages/LoginRegister";
 import { DetalleReceta } from "../pages/DetalleReceta";
@@ -10,39 +11,31 @@ import { EditarReceta } from "../pages/EditarReceta";
 import { Perfil } from "../pages/Perfil";
 
 export const router = createBrowserRouter([
-  // Rutas públicas (solo accesibles sin sesión)
   {
-    element: <PublicRoute />,
+    path: "/",
+    element: <MainLayout />,
     children: [
+      // Rutas públicas accesibles por cualquiera
+      { index: true, element: <Inicio /> },
+      { path: "recetas/:id", element: <DetalleReceta /> },
+
+      // Solo accesibles sin sesión activa
       {
-        path: ROUTES.LOGIN,
-        element: <LoginRegister />,
+        element: <PublicRoute />,
+        children: [
+          { path: ROUTES.LOGIN.slice(1), element: <LoginRegister /> },
+          { path: ROUTES.REGISTER.slice(1), element: <LoginRegister /> },
+        ],
       },
-    ],
-  },
-  // Rutas protegidas (requieren sesión)
-  {
-    element: <ProtectedRoute />,
-    children: [
+
+      // Requieren sesión activa
       {
-        path: ROUTES.INICIO,
-        element: <Inicio />,
-      },
-      {
-        path: ROUTES.PERFIL,
-        element: <Perfil />,
-      },
-      {
-        path: ROUTES.RECETA_DETALLE,
-        element: <DetalleReceta />,
-      },
-      {
-        path: ROUTES.RECETA_NUEVA,
-        element: <NuevaReceta />,
-      },
-      {
-        path: ROUTES.RECETA_EDITAR,
-        element: <EditarReceta />,
+        element: <ProtectedRoute />,
+        children: [
+          { path: ROUTES.NUEVA_RECETA.slice(1), element: <NuevaReceta /> },
+          { path: "editar/:id", element: <EditarReceta /> },
+          { path: ROUTES.PERFIL.slice(1), element: <Perfil /> },
+        ],
       },
     ],
   },

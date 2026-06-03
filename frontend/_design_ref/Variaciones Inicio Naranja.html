@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RecipeHub · Propuestas naranja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+
+  /* ---------- vibrant orange palette ---------- */
+  :root {
+    --cream:    #fff6ea;
+    --cream-2:  #ffeed9;
+    --paper:    #ffffff;
+    --ink:      #2a1a0e;
+    --ink-soft: #7c6655;
+    --muted:    #a8937f;
+    --line:     #f0e2cf;
+    --orange:   #f4701f;   /* vibrant appetizing */
+    --orange-d: #db5a12;
+    --orange-br:#ff9436;
+    --orange-soft:#ffe6cf;
+    --berry:    #d6443a;   /* secondary accent */
+    --gold:     #f59e0b;
+  }
+
+  .home { width: 1280px; background: var(--cream); color: var(--ink); }
+  .home .wrap { padding: 42px 56px 54px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .star-row { display: flex; align-items: center; gap: 2px; }
+  .star-row svg { width: 15px; height: 15px; }
+  .ph-img { position: relative; overflow: hidden; }
+  .ph-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ph-cap { position: absolute; left: 10px; bottom: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 10px; letter-spacing: .03em; color: rgba(255,255,255,.95); text-shadow: 0 1px 5px rgba(0,0,0,.45); z-index: 1; }
+
+  /* ===================================================== */
+  /* PROPOSAL A — Apetitoso brillante (sans, naranja)      */
+  /* ===================================================== */
+  .pA { font-family: "Hanken Grotesk", sans-serif; }
+  .pA .nav { display: flex; align-items: center; gap: 22px; height: 76px; padding: 0 56px; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .pA .logo-mark { width: 36px; height: 36px; border-radius: 11px; background: linear-gradient(150deg, var(--orange-br), var(--orange-d)); color: #fff; display: grid; place-items: center; font-family: "Schibsted Grotesk"; font-weight: 900; font-size: 20px; box-shadow: 0 4px 12px rgba(244,112,31,.35); }
+  .pA .brand { font-family: "Schibsted Grotesk", sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -.02em; }
+  .pA .brand span { color: var(--orange); }
+  .pA .nav-links { display: flex; gap: 4px; margin-left: 16px; }
+  .pA .nav-links a { font-size: 14px; color: var(--ink-soft); text-decoration: none; font-weight: 600; padding: 8px 14px; border-radius: 999px; }
+  .pA .nav-links a.active { color: var(--orange-d); background: var(--orange-soft); }
+  .pA .nav-spacer { flex: 1; }
+  .pA .search { display: flex; align-items: center; gap: 9px; background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: 10px 16px; width: 250px; color: var(--muted); font-size: 13.5px; }
+  .pA .btn-login { background: var(--orange); color: #fff; border: none; border-radius: 12px; padding: 11px 22px; font-size: 14px; font-weight: 700; font-family: inherit; box-shadow: 0 4px 12px rgba(244,112,31,.3); }
+
+  .pA .hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .pA .eyebrow { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+  .pA .h1 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 800; font-size: 44px; line-height: 1.02; letter-spacing: -.03em; margin: 12px 0 0; }
+  .pA .h1 span { color: var(--orange); }
+  .pA .lede { color: var(--ink-soft); font-size: 15.5px; margin: 13px 0 0; max-width: 460px; line-height: 1.5; }
+  .pA .count { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .pA .filters { display: flex; align-items: center; gap: 9px; margin: 30px 0 28px; flex-wrap: wrap; }
+  .pA .chip { font-size: 13.5px; color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 9px 17px; font-weight: 600; }
+  .pA .chip.on { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 4px 11px rgba(244,112,31,.28); }
+  .pA .seg { display: flex; background: var(--cream-2); border-radius: 999px; padding: 3px; margin-left: auto; }
+  .pA .seg span { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); padding: 7px 14px; border-radius: 999px; }
+  .pA .seg span.on { background: var(--paper); color: var(--orange-d); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+
+  .pA .card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 6px 20px rgba(120,70,20,.06); }
+  .pA .card .ph-img { height: 188px; }
+  .pA .card .badge { position: absolute; top: 12px; left: 12px; z-index: 1; background: var(--orange); color: #fff; font-size: 11.5px; font-weight: 700; padding: 5px 12px; border-radius: 999px; box-shadow: 0 3px 9px rgba(0,0,0,.18); }
+  .pA .card .heart { position: absolute; top: 12px; right: 12px; z-index: 1; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.94); display: grid; place-items: center; }
+  .pA .card .body { padding: 16px 17px 17px; }
+  .pA .card .cat-tag { font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--orange); }
+  .pA .card h3 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -.01em; margin: 6px 0 0; line-height: 1.18; }
+  .pA .card .meta { display: flex; align-items: center; gap: 14px; color: var(--ink-soft); font-size: 13px; margin-top: 11px; font-weight: 500; }
+  .pA .card .meta .ic { display: flex; align-items: center; gap: 5px; }
+  .pA .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
+  .pA .card .rate { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--ink); }
+  .pA .card .rate b { color: var(--gold); font-size: 15px; }
+  .pA .card .author { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+  .pA .card .av { width: 22px; height: 22px; border-radius: 50%; background: var(--orange-soft); }
+
+  /* ===================================================== */
+  /* PROPOSAL B — Editorial sabroso (serif + naranja)      */
+  /* ===================================================== */
+  .pB { font-family: "Hanken Grotesk", sans-serif; }
+  .pB .nav { display: flex; align-items: center; gap: 28px; height: 76px; padding: 0 56px; border-bottom: 1px solid var(--line); background: var(--cream); }
+  .pB .brand { font-family: "Newsreader", serif; font-weight: 600; font-size: 26px; letter-spacing: -.01em; }
+  .pB .brand span { color: var(--orange); }
+  .pB .nav-links { display: flex; gap: 26px; margin-left: 14px; }
+  .pB .nav-links a { font-size: 14.5px; color: var(--ink-soft); text-decoration: none; font-weight: 600; }
+  .pB .nav-links a.active { color: var(--orange-d); }
+  .pB .nav-spacer { flex: 1; }
+  .pB .search { display: flex; align-items: center; gap: 9px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; width: 230px; color: var(--muted); font-size: 13.5px; }
+  .pB .btn-login { border: none; background: var(--orange); color: #fff; border-radius: 999px; padding: 10px 22px; font-size: 14px; font-weight: 700; font-family: inherit; box-shadow: 0 4px 12px rgba(244,112,31,.3); }
+
+  .pB .banner { background: linear-gradient(135deg, #ff8a3d, var(--orange-d)); border-radius: 24px; padding: 40px 44px; display: flex; align-items: center; justify-content: space-between; gap: 32px; color: #fff; overflow: hidden; position: relative; }
+  .pB .banner .eyebrow { font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; opacity: .9; }
+  .pB .banner h1 { font-family: "Newsreader", serif; font-weight: 500; font-size: 44px; line-height: 1.04; letter-spacing: -.015em; margin: 12px 0 0; max-width: 560px; }
+  .pB .banner p { font-size: 15px; margin: 14px 0 0; max-width: 440px; line-height: 1.5; opacity: .92; }
+  .pB .banner .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-top: 22px; }
+  .pB .banner .blob { position: absolute; right: -40px; top: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,.1); }
+
+  .pB .filters { display: flex; align-items: center; gap: 8px; margin: 34px 0 30px; flex-wrap: wrap; }
+  .pB .cat { font-size: 14.5px; color: var(--ink-soft); padding: 7px 4px; font-weight: 600; border-bottom: 2px solid transparent; }
+  .pB .cat.on { color: var(--ink); border-color: var(--orange); }
+  .pB .sep { width: 1px; height: 22px; background: var(--line); margin: 0 12px; }
+  .pB .diff { font-size: 13px; color: var(--ink-soft); border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 7px 15px; font-weight: 600; }
+
+  .pB .card .ph-img { height: 226px; border-radius: 14px; }
+  .pB .card .cat-tag { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-top: 15px; }
+  .pB .card h3 { font-family: "Newsreader", serif; font-weight: 500; font-size: 24px; line-height: 1.1; letter-spacing: -.01em; margin: 7px 0 0; }
+  .pB .card .meta { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 13.5px; margin-top: 11px; font-weight: 500; }
+  .pB .card .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+  .pB .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .pB .card .rate { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--ink); font-weight: 700; }
+  .pB .card .author { font-size: 12.5px; color: var(--muted); }
+
+  /* ===================================================== */
+  /* PROPOSAL C — Bold / Sabroso (dark + naranja bloque)   */
+  /* ===================================================== */
+  .pC { font-family: "Hanken Grotesk", sans-serif; background: #1c120a; }
+  .pC .nav { display: flex; align-items: center; gap: 22px; height: 76px; padding: 0 56px; background: #1c120a; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .pC .logo-mark { width: 36px; height: 36px; border-radius: 11px; background: var(--orange); color: #1c120a; display: grid; place-items: center; font-family: "Schibsted Grotesk"; font-weight: 900; font-size: 20px; }
+  .pC .brand { font-family: "Schibsted Grotesk", sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -.02em; color: #fff; }
+  .pC .brand span { color: var(--orange-br); }
+  .pC .nav-links { display: flex; gap: 4px; margin-left: 16px; }
+  .pC .nav-links a { font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; font-weight: 600; padding: 8px 14px; border-radius: 999px; }
+  .pC .nav-links a.active { color: #fff; background: rgba(255,255,255,.1); }
+  .pC .nav-spacer { flex: 1; }
+  .pC .search { display: flex; align-items: center; gap: 9px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 10px 16px; width: 240px; color: rgba(255,255,255,.5); font-size: 13.5px; }
+  .pC .btn-login { background: var(--orange); color: #1c120a; border: none; border-radius: 12px; padding: 11px 22px; font-size: 14px; font-weight: 800; font-family: inherit; }
+
+  .pC .wrap { padding: 40px 56px 54px; }
+  .pC .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; margin-bottom: 36px; }
+  .pC .hero-l { background: var(--orange); border-radius: 24px; padding: 40px; color: #1c120a; display: flex; flex-direction: column; justify-content: center; }
+  .pC .hero-l .eyebrow { font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
+  .pC .hero-l h1 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 900; font-size: 52px; line-height: .98; letter-spacing: -.035em; margin: 14px 0 0; }
+  .pC .hero-l p { font-size: 15.5px; margin: 16px 0 0; max-width: 380px; line-height: 1.5; font-weight: 500; }
+  .pC .hero-r { border-radius: 24px; overflow: hidden; position: relative; min-height: 280px; }
+  .pC .hero-r img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pC .hero-r .tag { position: absolute; left: 18px; bottom: 18px; background: rgba(28,18,10,.85); color: #fff; padding: 9px 15px; border-radius: 999px; font-size: 12.5px; font-weight: 700; z-index: 1; }
+
+  .pC .panel { background: var(--cream); border-radius: 24px; padding: 30px 32px 36px; }
+  .pC .filters { display: flex; align-items: center; gap: 9px; margin: 0 0 26px; flex-wrap: wrap; }
+  .pC .chip { font-size: 13.5px; color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 9px 17px; font-weight: 700; }
+  .pC .chip.on { background: #1c120a; color: #fff; border-color: #1c120a; }
+  .pC .diff { margin-left: auto; font-size: 13px; color: var(--ink-soft); border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 9px 15px; font-weight: 600; }
+
+  .pC .card { background: var(--paper); border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+  .pC .card .ph-img { height: 180px; }
+  .pC .card .badge { position: absolute; top: 12px; left: 12px; z-index: 1; background: rgba(28,18,10,.85); color: #fff; font-size: 11px; font-weight: 700; padding: 5px 11px; border-radius: 999px; }
+  .pC .card .body { padding: 15px 16px 16px; }
+  .pC .card .cat-tag { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--orange); }
+  .pC .card h3 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 700; font-size: 17.5px; letter-spacing: -.01em; margin: 6px 0 0; line-height: 1.18; }
+  .pC .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .pC .card .meta { display: flex; align-items: center; gap: 12px; color: var(--ink-soft); font-size: 12.5px; font-weight: 600; }
+  .pC .card .rate { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: var(--ink); }
+  .pC .card .rate b { color: var(--gold); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+const RECIPES = [
+  { t:"Tostada de aguacate y huevo", cat:"Desayuno", time:"15 min", diff:"Fácil",  rate:4.8, author:"Lucía Fernández", tone:["#cdd6ad","#9aa86a"], cap:"Tostada de aguacate", img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=640&q=70" },
+  { t:"Pasta al pesto genovés",      cat:"Almuerzo", time:"25 min", diff:"Media",  rate:4.6, author:"Marco Ruiz",      tone:["#c8d2a0","#8a9c58"], cap:"Pasta al pesto",     img:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=640&q=70" },
+  { t:"Ensalada mediterránea",       cat:"Almuerzo", time:"10 min", diff:"Fácil",  rate:4.5, author:"Sara Navarro",    tone:["#cdd9b4","#92a866"], cap:"Ensalada fresca",    img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=640&q=70" },
+  { t:"Tarta de manzana clásica",    cat:"Postre",   time:"60 min", diff:"Difícil",rate:4.9, author:"Diego Méndez",    tone:["#e8c98a","#c69850"], cap:"Tarta de manzana",   img:"https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?w=640&q=70" },
+  { t:"Curry de garbanzos y coco",   cat:"Cena",     time:"35 min", diff:"Media",  rate:4.7, author:"Paula Vidal",     tone:["#e6b074","#c47c3c"], cap:"Curry de garbanzos", img:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=640&q=70" },
+  { t:"Tortitas con arándanos",      cat:"Desayuno", time:"20 min", diff:"Fácil",  rate:4.8, author:"Tomás Gil",       tone:["#edc585","#cf9a4d"], cap:"Tortitas",           img:"https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=640&q=70" },
+];
+
+function Star({ fill }) {
+  return (
+    <svg viewBox="0 0 24 24" fill={fill ? "var(--gold)" : "none"} stroke={fill ? "var(--gold)" : "#d6c3ad"} strokeWidth="1.5">
+      <path d="M12 17.3l-5.4 3 1-6-4.4-4.3 6.1-.9L12 3l2.7 5.6 6.1.9-4.4 4.3 1 6z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function Stars({ rate }) {
+  const n = Math.round(rate);
+  return <span className="star-row">{[1,2,3,4,5].map(i => <Star key={i} fill={i <= n} />)}</span>;
+}
+function PhImg({ r, h, children }) {
+  return (
+    <div className="ph-img" style={{ background:`linear-gradient(140deg, ${r.tone[0]}, ${r.tone[1]})` }}>
+      <img src={r.img} alt={r.t} onError={(e)=>{ e.target.style.display='none'; }} />
+      <span className="ph-cap">{r.cap}</span>
+      {children}
+    </div>
+  );
+}
+const Ico = {
+  search: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>,
+  clock: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>,
+  flame: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3c1 3-2 4-2 7a2 2 0 004 0c2 2 3 3 3 6a5 5 0 01-10 0c0-4 5-6 5-13z"/></svg>,
+  heart: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f4701f" strokeWidth="2"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></svg>,
+  star: <span style={{color:'var(--gold)'}}>★</span>,
+};
+
+/* ---------- Proposal A ---------- */
+function HomeA() {
+  return (
+    <div className="home pA">
+      <div className="nav">
+        <div className="logo-mark">R</div>
+        <div className="brand">Recipe<span>Hub</span></div>
+        <div className="nav-links"><a className="active">Inicio</a><a>Explorar</a><a>Mis recetas</a></div>
+        <div className="nav-spacer"></div>
+        <div className="search">{Ico.search}<span>Buscar recetas, ingredientes…</span></div>
+        <button className="btn-login">Iniciar sesión</button>
+      </div>
+      <div className="wrap">
+        <div className="hero">
+          <div>
+            <div className="eyebrow">Recetas de la comunidad</div>
+            <h1 className="h1">Cocina algo <span>delicioso</span> hoy.</h1>
+            <p className="lede">Descubre, guarda y comparte recetas caseras. Filtra por momento del día y dificultad.</p>
+          </div>
+          <div className="count">248 recetas · 1.2k cocineros</div>
+        </div>
+        <div className="filters">
+          <span className="chip on">Todas</span><span className="chip">Desayuno</span><span className="chip">Almuerzo</span><span className="chip">Cena</span><span className="chip">Postre</span>
+          <span className="seg"><span className="on">Toda dificultad</span><span>Fácil</span><span>Media</span><span>Difícil</span></span>
+        </div>
+        <div className="grid3">
+          {RECIPES.map((r, i) => (
+            <div className="card" key={i}>
+              <PhImg r={r}>
+                <span className="badge">{r.diff}</span>
+                <span className="heart">{Ico.heart}</span>
+              </PhImg>
+              <div className="body">
+                <div className="cat-tag">{r.cat}</div>
+                <h3>{r.t}</h3>
+                <div className="meta"><span className="ic">{Ico.clock}{r.time}</span><span className="ic">{Ico.flame}{r.diff}</span></div>
+                <div className="foot">
+                  <span className="rate"><b>★</b> {r.rate.toFixed(1)} <span style={{color:'var(--muted)',fontWeight:500}}>(124)</span></span>
+                  <span className="author"><span className="av"></span>{r.author.split(' ')[0]}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Proposal B ---------- */
+function HomeB() {
+  return (
+    <div className="home pB">
+      <div className="nav">
+        <div className="brand">Recipe<span>Hub</span></div>
+        <div className="nav-links"><a className="active">Inicio</a><a>Explorar</a><a>Nueva receta</a></div>
+        <div className="nav-spacer"></div>
+        <div className="search">{Ico.search}<span>Buscar recetas…</span></div>
+        <button className="btn-login">Iniciar sesión</button>
+      </div>
+      <div className="wrap">
+        <div className="banner">
+          <div style={{position:'relative',zIndex:1}}>
+            <div className="eyebrow">El recetario de la comunidad</div>
+            <h1>Cocina algo memorable esta noche.</h1>
+            <p>Recetas caseras compartidas y puntuadas por personas que cocinan de verdad.</p>
+            <span className="pill">{Ico.star} Más de 1.200 cocineros activos</span>
+          </div>
+          <div className="blob"></div>
+        </div>
+        <div className="filters">
+          <span className="cat on">Todas</span><span className="cat">Desayuno</span><span className="cat">Almuerzo</span><span className="cat">Cena</span><span className="cat">Postre</span>
+          <span className="sep"></span>
+          <span className="diff">Cualquier dificultad ⌄</span>
+        </div>
+        <div className="grid3">
+          {RECIPES.map((r, i) => (
+            <div className="card" key={i}>
+              <PhImg r={r} />
+              <div className="cat-tag">{r.cat}</div>
+              <h3>{r.t}</h3>
+              <div className="meta"><span>{r.time}</span><span className="dot"></span><span>{r.diff}</span></div>
+              <div className="foot">
+                <span className="rate"><Stars rate={r.rate} /> {r.rate.toFixed(1)}</span>
+                <span className="author">por {r.author}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Proposal C ---------- */
+function HomeC() {
+  return (
+    <div className="home pC">
+      <div className="nav">
+        <div className="logo-mark">R</div>
+        <div className="brand">Recipe<span>Hub</span></div>
+        <div className="nav-links"><a className="active">Inicio</a><a>Explorar</a><a>Mis recetas</a></div>
+        <div className="nav-spacer"></div>
+        <div className="search">{Ico.search}<span>Buscar recetas…</span></div>
+        <button className="btn-login">Iniciar sesión</button>
+      </div>
+      <div className="wrap">
+        <div className="hero">
+          <div className="hero-l">
+            <div className="eyebrow">Recetas de la comunidad</div>
+            <h1>¿Qué cocinamos hoy?</h1>
+            <p>Sabor casero, compartido. Descubre, guarda y publica tus mejores recetas.</p>
+          </div>
+          <div className="hero-r" style={{background:'linear-gradient(140deg,#e6b074,#c47c3c)'}}>
+            <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=720&q=70" alt="" onError={(e)=>{e.target.style.display='none';}} />
+            <span className="tag">★ 4.9 · Receta de la semana</span>
+          </div>
+        </div>
+        <div className="panel">
+          <div className="filters">
+            <span className="chip on">Todas</span><span className="chip">Desayuno</span><span className="chip">Almuerzo</span><span className="chip">Cena</span><span className="chip">Postre</span>
+            <span className="diff">Cualquier dificultad ⌄</span>
+          </div>
+          <div className="grid3">
+            {RECIPES.map((r, i) => (
+              <div className="card" key={i}>
+                <PhImg r={r}><span className="badge">{r.diff}</span></PhImg>
+                <div className="body">
+                  <div className="cat-tag">{r.cat}</div>
+                  <h3>{r.t}</h3>
+                  <div className="foot">
+                    <span className="meta"><span>{Ico.clock} {r.time}</span></span>
+                    <span className="rate"><b>★</b> {r.rate.toFixed(1)}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection id="naranja" title="Inicio · 3 propuestas — naranja apetitoso" subtitle="Naranja vibrante #f4701f · cálido y energético">
+        <DCArtboard id="a" label="A · Apetitoso brillante — sans + naranja" width={1280} height={1248}><HomeA /></DCArtboard>
+        <DCArtboard id="b" label="B · Editorial sabroso — banner + serif" width={1280} height={1316}><HomeB /></DCArtboard>
+        <DCArtboard id="c" label="C · Bold oscuro — hero split + panel" width={1280} height={1212}><HomeC /></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
