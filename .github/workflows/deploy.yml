@@ -24,7 +24,7 @@ jobs:
 
       - name: Instalar dependencias del backend
         working-directory: ./Backend
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Correr tests del backend
         working-directory: ./Backend
@@ -52,7 +52,7 @@ jobs:
 
       - name: Instalar dependencias del frontend
         working-directory: ./frontend
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build del frontend
         working-directory: ./frontend
