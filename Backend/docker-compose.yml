@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: recipenexus-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASS}
+      MONGO_INITDB_DATABASE: recipenexus
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - recipenexus-net
+    # Sin ports: MongoDB NO está expuesto al host
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recipenexus-api
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL}
+    depends_on:
+      - mongo
+    networks:
+      - recipenexus-net
+
+volumes:
+  mongo-data:
+    name: recipenexus-mongo-data
+
+networks:
+  recipenexus-net:
+    name: recipenexus-net
+    driver: bridge

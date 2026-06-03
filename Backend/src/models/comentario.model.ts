@@ -2,9 +2,19 @@ import { Schema, model, Types } from "mongoose";
 
 const comentarioSchema = new Schema(
   {
-    contenido: { type: String, required: true, trim: true },
-    autor: { type: Types.ObjectId, ref: "Usuario", required: true },
-    receta: { type: Types.ObjectId, ref: "Receta", required: true },
+    recetaId: { type: Types.ObjectId, ref: "Receta", required: true },
+    usuarioId: { type: Types.ObjectId, ref: "Usuario", required: true },
+    texto: { type: String, required: true, trim: true },
+    calificacion: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+      validate: {
+        validator: Number.isInteger,
+        message: "La calificación debe ser un entero entre 1 y 5",
+      },
+    },
   },
   { timestamps: true }
 );
