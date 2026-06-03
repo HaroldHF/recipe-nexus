@@ -23,12 +23,10 @@ jobs:
           version: 9
 
       - name: Instalar dependencias del backend
-        working-directory: ./Backend
-        run: pnpm install --no-frozen-lockfile
+        run: cd Backend && pnpm install --ignore-workspace
 
       - name: Correr tests del backend
-        working-directory: ./Backend
-        run: pnpm test
+        run: cd Backend && pnpm test
         env:
           JWT_SECRET: test_secret_for_ci
           MONGO_URI: mongodb://localhost:27017/test
@@ -51,12 +49,10 @@ jobs:
           version: 9
 
       - name: Instalar dependencias del frontend
-        working-directory: ./frontend
-        run: pnpm install --no-frozen-lockfile
+        run: cd frontend && pnpm install --ignore-workspace
 
       - name: Build del frontend
-        working-directory: ./frontend
-        run: pnpm run build
+        run: cd frontend && pnpm run build
         env:
           VITE_API_URL: https://api.recipe-nexus.xyz
 
