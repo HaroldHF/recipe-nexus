@@ -1,7 +1,9 @@
 import axios from "axios";
 
+// Base de la API tomada SIEMPRE de la variable de entorno (Vite la inyecta
+// en build/dev desde .env.development / .env.production). Nada hardcodeado.
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
 });
 
 api.interceptors.request.use((config) => {
