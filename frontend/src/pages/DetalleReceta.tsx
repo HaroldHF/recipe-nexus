@@ -35,7 +35,7 @@ export function DetalleReceta() {
   }
 
   const receta = recetaQuery.data;
-  const autorObj = receta.autor as Usuario;
+  const autorObj = receta.autorId as Usuario;
   const esAutor = !!usuario && autorObj?._id === usuario._id;
 
   return (

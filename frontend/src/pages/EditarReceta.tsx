@@ -33,7 +33,10 @@ export function EditarReceta() {
         titulo: receta.titulo,
         descripcion: receta.descripcion,
         categoria: receta.categoria,
-        tiempoPrep: receta.tiempoPrep,
+        dificultad: receta.dificultad,
+        tiempoMin: receta.tiempoMin,
+        porciones: receta.porciones,
+        tags: receta.tags,
         ingredientes: receta.ingredientes,
         pasos: receta.pasos,
       }}

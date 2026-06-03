@@ -1,20 +1,16 @@
-import type { Paso } from "../../types";
-
 interface PasosListaProps {
-  pasos: Paso[];
+  pasos: string[];
 }
 
 export function PasosLista({ pasos }: PasosListaProps) {
-  const sorted = [...pasos].sort((a, b) => a.orden - b.orden);
-
   return (
     <>
       <h2 className="section-h">Preparación</h2>
       <ol className="steps">
-        {sorted.map((paso, i) => (
-          <li key={paso.orden}>
+        {pasos.map((paso, i) => (
+          <li key={i}>
             <span className="step-n">{i + 1}</span>
-            <span className="step-tx">{paso.descripcion}</span>
+            <span className="step-tx">{paso}</span>
           </li>
         ))}
       </ol>

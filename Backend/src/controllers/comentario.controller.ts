@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import * as comentarioService from "../services/comentario.service.js";
+import { crearComentarioSchema } from "../validators/comentario.validator.js";
 
 export async function getByReceta(req: Request, res: Response): Promise<void> {
   try {
@@ -11,15 +12,22 @@ export async function getByReceta(req: Request, res: Response): Promise<void> {
 }
 
 export async function create(req: Request, res: Response): Promise<void> {
-  const contenido: unknown = req.body?.contenido;
-  if (typeof contenido !== "string" || contenido.trim().length === 0) {
-    res.status(400).json({ message: "El contenido del comentario es requerido" });
+  const parsed = crearComentarioSchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({
+      message: "Datos inválidos",
+      errors: parsed.error.issues.map((e) => ({
+        campo: e.path.join("."),
+        mensaje: e.message,
+      })),
+    });
     return;
   }
 
   try {
     const comentario = await comentarioService.createComentario(
-      contenido,
+      parsed.data.texto,
+      parsed.data.calificacion,
       req.usuario!.id,
       req.params.recetaId as string
     );

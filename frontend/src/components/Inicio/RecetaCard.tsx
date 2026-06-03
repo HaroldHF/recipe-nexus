@@ -33,7 +33,7 @@ interface RecetaCardProps {
 }
 
 export function RecetaCard({ receta }: RecetaCardProps) {
-  const autor = receta.autor as Usuario;
+  const autor = receta.autorId as Usuario;
 
   return (
     <Link to={buildRoute.detalle(receta._id)} className="r-card fade-in">
@@ -56,10 +56,10 @@ export function RecetaCard({ receta }: RecetaCardProps) {
       <div className="cat-tag">{receta.categoria}</div>
       <h3>{receta.titulo}</h3>
       <div className="meta">
-        {receta.tiempoPrep && (
+        {receta.tiempoMin && (
           <>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-              <ClockIcon size={14} /> {receta.tiempoPrep} min
+              <ClockIcon size={14} /> {receta.tiempoMin} min
             </span>
             <span className="dot" />
           </>

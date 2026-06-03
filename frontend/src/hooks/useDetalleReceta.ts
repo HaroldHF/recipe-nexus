@@ -5,6 +5,7 @@ import {
   crearComentario,
   eliminarComentario,
 } from "../services/recetaService";
+import type { ComentarioFormDTO } from "../types";
 
 export function useDetalleReceta(id: string) {
   const queryClient = useQueryClient();
@@ -22,7 +23,7 @@ export function useDetalleReceta(id: string) {
   });
 
   const agregarComentario = useMutation({
-    mutationFn: (contenido: string) => crearComentario(id, contenido),
+    mutationFn: (data: ComentarioFormDTO) => crearComentario(id, data),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["comentarios", id] });
     },

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { RecetaFormDTO, Ingrediente, Paso } from "../../types";
-import { PlusIcon, TrashIcon } from "../shared/Icons";
+import type { RecetaFormDTO, Ingrediente } from "../../types";
+import { PlusIcon, TrashIcon, ImageIcon } from "../shared/Icons";
 
 const CATS = ["Desayuno", "Almuerzo", "Cena", "Postre", "Merienda", "General"];
 const DIFFS = ["Fácil", "Media", "Difícil"];
@@ -26,17 +26,20 @@ export function FormNuevaReceta({
   const [titulo, setTitulo] = useState(defaultValues?.titulo ?? "");
   const [descripcion, setDescripcion] = useState(defaultValues?.descripcion ?? "");
   const [categoria, setCategoria] = useState(defaultValues?.categoria ?? "Almuerzo");
-  const [tiempoPrep, setTiempoPrep] = useState<number | "">(defaultValues?.tiempoPrep ?? 30);
+  const [dificultad, setDificultad] = useState(defaultValues?.dificultad ?? "Fácil");
+  const [tiempoMin, setTiempoMin] = useState<number | "">(defaultValues?.tiempoMin ?? 30);
+  const [porciones, setPorciones] = useState<number | "">(defaultValues?.porciones ?? 2);
+  const [tags, setTags] = useState(defaultValues?.tags?.join(", ") ?? "");
   const [imagenUrl, setImagenUrl] = useState(defaultValues?.imagenUrl ?? "");
+  const [isDragging, setIsDragging] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const [ingredientes, setIngredientes] = useState<Ingrediente[]>(
     defaultValues?.ingredientes?.length
       ? defaultValues.ingredientes.map((i) => ({ ...i }))
       : [{ nombre: "", cantidad: "", unidad: "g" }]
   );
-  const [pasos, setPasos] = useState<Paso[]>(
-    defaultValues?.pasos?.length
-      ? [...defaultValues.pasos]
-      : [{ orden: 1, descripcion: "" }]
+  const [pasos, setPasos] = useState<string[]>(
+    defaultValues?.pasos?.length ? [...defaultValues.pasos] : [""]
   );
   const [errs, setErrs] = useState<Record<string, string>>({});
 
@@ -50,12 +53,55 @@ export function FormNuevaReceta({
     setIngredientes((a) => a.map((x, j) => (j === i ? { ...x, [k]: v } : x)));
   }
 
-  function addPaso() { setPasos((a) => [...a, { orden: a.length + 1, descripcion: "" }]); }
+  function addPaso() { setPasos((a) => [...a, ""]); }
   function delPaso(i: number) {
-    setPasos((a) => a.length > 1 ? a.filter((_, j) => j !== i).map((p, idx) => ({ ...p, orden: idx + 1 })) : a);
+    setPasos((a) => a.length > 1 ? a.filter((_, j) => j !== i) : a);
   }
   function setPasoDesc(i: number, v: string) {
-    setPasos((a) => a.map((p, j) => (j === i ? { ...p, descripcion: v } : p)));
+    setPasos((a) => a.map((p, j) => (j === i ? v : p)));
+  }
+
+  // --- Imagen: drag & drop de una URL desde otra pestaña/sitio ---
+  function aplicarUrl(raw: string) {
+    // text/uri-list puede traer varias líneas; las que empiezan con # son comentarios
+    const url = raw
+      .split("\n")
+      .map((s) => s.trim())
+      .find((s) => s && !s.startsWith("#"));
+    if (url) {
+      setImagenUrl(url);
+      setImgError(false);
+    }
+  }
+
+  function handleDragEnter(e: React.DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }
+
+  function handleDragOver(e: React.DragEvent) {
+    e.preventDefault(); // necesario para que onDrop se dispare
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "copy";
+  }
+
+  function handleDragLeave(e: React.DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    // Evita el parpadeo cuando el cursor pasa sobre los hijos de la zona
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+      setIsDragging(false);
+    }
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    const uri = e.dataTransfer.getData("text/uri-list");
+    const plain = e.dataTransfer.getData("text/plain");
+    aplicarUrl(uri || plain || "");
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -64,18 +110,23 @@ export function FormNuevaReceta({
     if (!titulo.trim()) er.titulo = "El título es obligatorio.";
     if (!descripcion.trim()) er.desc = "Añade una breve descripción del plato.";
     if (!ingredientes.some((i) => i.nombre.trim())) er.ings = "Añade al menos un ingrediente con nombre.";
-    if (!pasos.some((p) => p.descripcion.trim())) er.pasos = "Añade al menos un paso de preparación.";
+    if (!pasos.some((p) => p.trim())) er.pasos = "Añade al menos un paso de preparación.";
     setErrs(er);
     if (Object.keys(er).length) return;
+
+    const tagsArr = tags.split(",").map((t) => t.trim()).filter(Boolean);
 
     onSubmit({
       titulo: titulo.trim(),
       descripcion: descripcion.trim(),
       categoria,
-      tiempoPrep: tiempoPrep === "" ? undefined : Number(tiempoPrep),
+      dificultad,
+      tiempoMin: tiempoMin === "" ? undefined : Number(tiempoMin),
+      porciones: porciones === "" ? undefined : Number(porciones),
+      tags: tagsArr.length ? tagsArr : undefined,
       imagenUrl: imagenUrl.trim() || undefined,
       ingredientes: ingredientes.filter((i) => i.nombre.trim()),
-      pasos: pasos.filter((p) => p.descripcion.trim()),
+      pasos: pasos.map((p) => p.trim()).filter(Boolean),
     });
   }
 
@@ -119,20 +170,55 @@ export function FormNuevaReceta({
 
           <div className="field">
             <label className="label">Imagen <span className="opt">(opcional)</span></label>
+
+            <div
+              onDragEnter={handleDragEnter}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              style={{
+                position: "relative",
+                border: `2px dashed ${isDragging ? "var(--orange)" : "var(--line-2)"}`,
+                background: isDragging ? "var(--orange-soft)" : "var(--cream-2)",
+                borderRadius: 14,
+                minHeight: 190,
+                display: "grid",
+                placeItems: "center",
+                textAlign: "center",
+                padding: 18,
+                overflow: "hidden",
+                transition: "border-color .15s, background .15s",
+              }}
+            >
+              {imagenUrl.trim() && !imgError ? (
+                <img
+                  src={imagenUrl}
+                  alt="Vista previa"
+                  onError={() => setImgError(true)}
+                  onLoad={() => setImgError(false)}
+                  style={{ width: "100%", maxHeight: 240, objectFit: "cover", borderRadius: 10, display: "block", pointerEvents: "none" }}
+                />
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, color: imgError ? "var(--berry)" : "var(--ink-soft)", pointerEvents: "none" }}>
+                  <ImageIcon size={34} />
+                  <span style={{ fontWeight: 600, fontSize: 14 }}>
+                    {imgError ? "Imagen no válida" : "Arrastrá una imagen aquí"}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <label className="label" style={{ marginTop: 12, fontSize: 12, color: "var(--ink-soft)" }}>
+              o pegá la URL directamente
+            </label>
             <input
               className="input"
               type="text"
               value={imagenUrl}
-              onChange={(e) => setImagenUrl(e.target.value)}
-              placeholder="URL de imagen (opcional)"
+              onChange={(e) => { setImagenUrl(e.target.value); setImgError(false); }}
+              placeholder="https://…"
+              style={{ height: 38, fontSize: 13 }}
             />
-            {imagenUrl.trim() && (
-              <img
-                src={imagenUrl}
-                alt="Vista previa"
-                style={{ marginTop: 10, width: "100%", maxHeight: 220, objectFit: "cover", borderRadius: 12 }}
-              />
-            )}
           </div>
 
           <div className="row row-3">
@@ -144,8 +230,8 @@ export function FormNuevaReceta({
             </div>
             <div className="field" style={{ margin: 0 }}>
               <label className="label">Dificultad</label>
-              <select className="select">
-                {DIFFS.map((d) => <option key={d}>{d}</option>)}
+              <select className="select" value={dificultad} onChange={(e) => setDificultad(e.target.value)}>
+                {DIFFS.map((d) => <option key={d} value={d}>{d}</option>)}
               </select>
             </div>
             <div className="field" style={{ margin: 0 }}>
@@ -154,8 +240,31 @@ export function FormNuevaReceta({
                 className="input"
                 type="number"
                 min="1"
-                value={tiempoPrep}
-                onChange={(e) => setTiempoPrep(e.target.value === "" ? "" : Number(e.target.value))}
+                value={tiempoMin}
+                onChange={(e) => setTiempoMin(e.target.value === "" ? "" : Number(e.target.value))}
+              />
+            </div>
+          </div>
+
+          <div className="row" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16, marginTop: 16 }}>
+            <div className="field" style={{ margin: 0 }}>
+              <label className="label">Porciones</label>
+              <input
+                className="input"
+                type="number"
+                min="1"
+                value={porciones}
+                onChange={(e) => setPorciones(e.target.value === "" ? "" : Number(e.target.value))}
+              />
+            </div>
+            <div className="field" style={{ margin: 0 }}>
+              <label className="label">Tags <span className="opt">(separados por comas)</span></label>
+              <input
+                className="input"
+                type="text"
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+                placeholder="Ej. vegano, rápido, sin gluten"
               />
             </div>
           </div>
@@ -201,8 +310,8 @@ export function FormNuevaReceta({
             <div className="step-row" key={i}>
               <span className="num">{i + 1}</span>
               <textarea
-                className={"textarea" + (errs.pasos && !paso.descripcion.trim() ? " err" : "")}
-                value={paso.descripcion}
+                className={"textarea" + (errs.pasos && !paso.trim() ? " err" : "")}
+                value={paso}
                 onChange={(e) => { setPasoDesc(i, e.target.value); clr("pasos"); }}
                 placeholder={`Describe el paso ${i + 1}…`}
               />

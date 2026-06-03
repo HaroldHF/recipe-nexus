@@ -1,19 +1,20 @@
 import { Comentario } from "../models/comentario.model.js";
 
 export async function getComentariosByReceta(recetaId: string) {
-  return Comentario.find({ receta: recetaId })
-    .populate("autor", "nombre avatarUrl")
+  return Comentario.find({ recetaId })
+    .populate("usuarioId", "nombre avatarUrl")
     .sort({ createdAt: -1 });
 }
 
 export async function createComentario(
-  contenido: string,
-  autorId: string,
+  texto: string,
+  calificacion: number,
+  usuarioId: string,
   recetaId: string
 ) {
-  return Comentario.create({ contenido, autor: autorId, receta: recetaId });
+  return Comentario.create({ texto, calificacion, usuarioId, recetaId });
 }
 
-export async function deleteComentario(id: string, autorId: string) {
-  return Comentario.findOneAndDelete({ _id: id, autor: autorId });
+export async function deleteComentario(id: string, usuarioId: string) {
+  return Comentario.findOneAndDelete({ _id: id, usuarioId });
 }

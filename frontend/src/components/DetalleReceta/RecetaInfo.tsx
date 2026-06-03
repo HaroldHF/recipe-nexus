@@ -18,7 +18,7 @@ interface RecetaInfoProps {
 }
 
 export function RecetaInfo({ receta, onEditar, esAutor }: RecetaInfoProps) {
-  const autor = receta.autor as Usuario;
+  const autor = receta.autorId as Usuario;
   const gradiente = GRADIENTS[receta.categoria] ?? GRADIENTS["General"];
 
   return (
@@ -54,12 +54,12 @@ export function RecetaInfo({ receta, onEditar, esAutor }: RecetaInfoProps) {
 
       {/* Stats */}
       <div className="d-stats">
-        {receta.tiempoPrep && (
+        {receta.tiempoMin && (
           <div className="d-stat">
             <span className="ic"><ClockIcon size={18} /></span>
             <span>
               <span className="k">Tiempo</span>
-              <div className="v">{receta.tiempoPrep} min</div>
+              <div className="v">{receta.tiempoMin} min</div>
             </span>
           </div>
         )}

@@ -10,24 +10,22 @@ const ingredienteSchema = new Schema(
   { _id: false }
 );
 
-// Subdocumento embebido: paso de preparación
-const pasoSchema = new Schema(
-  {
-    orden: { type: Number, required: true },
-    descripcion: { type: String, required: true },
-  },
-  { _id: false }
-);
-
 const recetaSchema = new Schema(
   {
     titulo: { type: String, required: true, trim: true },
     descripcion: { type: String, required: true },
+    categoria: { type: String, required: true },
+    tiempoMin: { type: Number, required: true },
+    porciones: { type: Number, required: true },
+    dificultad: {
+      type: String,
+      required: true,
+      enum: ["Fácil", "Media", "Difícil"],
+    },
     ingredientes: { type: [ingredienteSchema], required: true }, // EMBEBIDO
-    pasos: { type: [pasoSchema], required: true }, // EMBEBIDO
-    autor: { type: Types.ObjectId, ref: "Usuario", required: true },
-    categoria: { type: String, default: "General" },
-    tiempoPrep: { type: Number },
+    pasos: { type: [String], required: true },
+    tags: { type: [String], default: [] },
+    autorId: { type: Types.ObjectId, ref: "Usuario", required: true },
     imagenUrl: { type: String, default: "" },
   },
   { timestamps: true }

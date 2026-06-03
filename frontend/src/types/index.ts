@@ -4,11 +4,6 @@ export interface Ingrediente {
   unidad: string;
 }
 
-export interface Paso {
-  orden: number;
-  descripcion: string;
-}
-
 export interface Usuario {
   _id: string;
   nombre: string;
@@ -20,11 +15,14 @@ export interface Receta {
   _id: string;
   titulo: string;
   descripcion: string;
-  ingredientes: Ingrediente[];
-  pasos: Paso[];
-  autor: Usuario | string;
   categoria: string;
-  tiempoPrep?: number;
+  tiempoMin: number;
+  porciones: number;
+  dificultad: string;
+  ingredientes: Ingrediente[];
+  pasos: string[];
+  tags?: string[];
+  autorId: Usuario | string;
   imagenUrl?: string;
   createdAt: string;
   updatedAt: string;
@@ -32,9 +30,10 @@ export interface Receta {
 
 export interface Comentario {
   _id: string;
-  contenido: string;
-  autor: Usuario | string;
-  receta: string;
+  texto: string;
+  calificacion: number;
+  usuarioId: Usuario | string;
+  recetaId: string;
   createdAt: string;
 }
 
@@ -52,9 +51,17 @@ export interface RegisterDTO {
 export interface RecetaFormDTO {
   titulo: string;
   descripcion: string;
-  ingredientes: Ingrediente[];
-  pasos: Paso[];
   categoria?: string;
-  tiempoPrep?: number;
+  tiempoMin?: number;
+  porciones?: number;
+  dificultad?: string;
+  ingredientes: Ingrediente[];
+  pasos: string[];
+  tags?: string[];
   imagenUrl?: string;
+}
+
+export interface ComentarioFormDTO {
+  texto: string;
+  calificacion: number;
 }

@@ -1,5 +1,5 @@
 import type { Comentario, Usuario } from "../../types";
-import { TrashIcon } from "../shared/Icons";
+import { TrashIcon, StarIcon } from "../shared/Icons";
 
 interface ComentariosListProps {
   comentarios: Comentario[];
@@ -19,7 +19,7 @@ export function ComentariosList({ comentarios, usuarioActualId, onEliminar }: Co
   return (
     <div className="comments">
       {comentarios.map((c) => {
-        const autor = c.autor as Usuario;
+        const autor = c.usuarioId as Usuario;
         const esAutor = autor?._id === usuarioActualId;
         const initials = autor?.nombre?.split(" ").map((w) => w[0]).slice(0, 2).join("") ?? "?";
 
@@ -45,7 +45,12 @@ export function ComentariosList({ comentarios, usuarioActualId, onEliminar }: Co
                   </button>
                 )}
               </div>
-              <div className="tx">{c.contenido}</div>
+              <span className="star-row" style={{ display: "inline-flex", gap: 1, margin: "2px 0 4px" }}>
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <StarIcon key={n} size={14} className={n <= c.calificacion ? "text-gold" : ""} />
+                ))}
+              </span>
+              <div className="tx">{c.texto}</div>
             </div>
           </div>
         );

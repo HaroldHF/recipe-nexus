@@ -1,5 +1,5 @@
 import api from "../api/axiosConfig";
-import type { Receta, RecetaFormDTO, Comentario } from "../types";
+import type { Receta, RecetaFormDTO, Comentario, ComentarioFormDTO } from "../types";
 
 export async function getRecetas(): Promise<Receta[]> {
   const res = await api.get<Receta[]>("/recetas");
@@ -30,8 +30,8 @@ export async function getComentarios(recetaId: string): Promise<Comentario[]> {
   return res.data;
 }
 
-export async function crearComentario(recetaId: string, contenido: string): Promise<Comentario> {
-  const res = await api.post<Comentario>(`/recetas/${recetaId}/comentarios`, { contenido });
+export async function crearComentario(recetaId: string, data: ComentarioFormDTO): Promise<Comentario> {
+  const res = await api.post<Comentario>(`/recetas/${recetaId}/comentarios`, data);
   return res.data;
 }
 
