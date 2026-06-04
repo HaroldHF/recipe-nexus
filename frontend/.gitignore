@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Config pública de Vite (las VITE_ se empaquetan en el cliente — seguras de commitear).
+# Re-incluidas porque el .gitignore raíz ignora .env.* de forma global.
+!.env.production
+!.env.development
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

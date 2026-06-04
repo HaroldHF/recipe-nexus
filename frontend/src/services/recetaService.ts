@@ -2,8 +2,16 @@ import api from "../api/axiosConfig";
 import type { Receta, RecetaFormDTO, Comentario, ComentarioFormDTO } from "../types";
 
 export async function getRecetas(): Promise<Receta[]> {
-  const res = await api.get<Receta[]>("/recetas");
-  return res.data;
+  const res = await api.get<Receta[] | { recetas?: Receta[]; data?: Receta[] }>("/recetas");
+  const payload = res.data;
+
+  // La API puede responder un array plano `[...]` o un objeto envoltorio
+  // tipo `{ recetas: [...] }`. Normalizamos siempre a un array para que el
+  // Home pueda hacer .map()/.filter() sin romperse ("a.map is not a function").
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.recetas)) return payload.recetas;
+  if (Array.isArray(payload?.data)) return payload.data;
+  return [];
 }
 
 export async function getRecetaById(id: string): Promise<Receta> {

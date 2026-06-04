@@ -1,0 +1,67 @@
+name: Deploy Recipe Nexus
+
+on:
+  workflow_run:
+    workflows: ["CI Recipe Nexus"]
+    branches:
+      - main
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Instalar dependencias del frontend
+        run: cd frontend && pnpm install --ignore-workspace
+
+      - name: Build del frontend
+        run: cd frontend && pnpm run build
+        env:
+          VITE_API_URL: https://api.recipe-nexus.xyz
+
+      - name: Copiar build al VPS por SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "frontend/dist/*"
+          target: "/var/www/recipe-nexus/recipe-nexus/frontend/dist"
+          strip_components: 2
+
+      - name: Deploy en VPS por SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /var/www/recipe-nexus/recipe-nexus
+            git pull origin main
+            docker compose down
+            docker compose up --build -d
+            sleep 10
+
+      - name: Health check post-deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            curl -f https://api.recipe-nexus.xyz/api/health
