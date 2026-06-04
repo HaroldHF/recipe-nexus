@@ -1,37 +1,17 @@
 name: Deploy Recipe Nexus
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI Recipe Nexus"]
     branches:
       - main
+    types:
+      - completed
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Instalar dependencias del backend
-        run: cd Backend && pnpm install --ignore-workspace
-
-      # TODO: agregar tests antes de la entrega
-      # - name: Correr tests del backend
-      #   run: cd Backend && pnpm test
-
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    needs: build-and-test
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -39,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
