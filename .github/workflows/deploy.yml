@@ -55,7 +55,11 @@ jobs:
             git pull origin main
             docker compose down
             docker compose up --build -d
-            sleep 10
+            for i in {1..10}; do
+              curl -f https://api.recipe-nexus.xyz/api/health && break
+              echo "Intento $i fallido, esperando..."
+              sleep 10
+            done
 
       - name: Health check post-deploy
         uses: appleboy/ssh-action@v1.0.3
