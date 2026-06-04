@@ -16,7 +16,7 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 # Manifiestos primero para aprovechar la caché de capas de Docker.
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml .npmrc ./
 
 # Instala todo (incluidas devDependencies como typescript) para poder buildear.
 RUN pnpm install --frozen-lockfile
