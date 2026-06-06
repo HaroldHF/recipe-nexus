@@ -43,7 +43,7 @@ export function EditarReceta() {
         porciones: receta.porciones,
         tags: receta.tags,
         ingredientes: receta.ingredientes,
-        pasos: receta.pasos,
+        pasos: receta.pasos.map((p) => ({ value: p })),
       }}
       isPending={editarMutation.isPending}
       submitLabel="Guardar cambios"
