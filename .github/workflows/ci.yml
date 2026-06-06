@@ -24,7 +24,7 @@ jobs:
           version: 11
 
       - name: Instalar dependencias del backend
-        run: cd Backend && pnpm install --ignore-workspace
+        run: cd Backend && pnpm install --ignore-workspace --config.strict-dep-builds=false
 
       - name: Correr tests del backend
         run: cd Backend && pnpm test
