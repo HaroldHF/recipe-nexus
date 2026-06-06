@@ -23,7 +23,7 @@ Se ha configurado una completa suite de pruebas automatizadas en el Backend util
    cd Backend
    ```
 
-2. Instala las dependencias (en caso de no haberlo hecho antes) usando pnpm:
+2. Instala las dependencias (en caso de no haberlo hecho antes) usando pnpm
    ```bash
    pnpm install
    ```

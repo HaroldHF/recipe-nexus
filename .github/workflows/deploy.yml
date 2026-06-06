@@ -52,10 +52,35 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /var/www/recipe-nexus/recipe-nexus
+
+            PREVIOUS_COMMIT=$(git rev-parse HEAD)
+            echo "Commit anterior: $PREVIOUS_COMMIT"
+
             git pull origin main
             docker compose down
             docker compose up --build -d
-            sleep 10
+
+            echo "Esperando que el backend levante..."
+            HEALTH_OK=false
+            for i in {1..10}; do
+              if curl -f https://api.recipe-nexus.xyz/api/health; then
+                HEALTH_OK=true
+                break
+              fi
+              echo "Intento $i fallido, esperando 10s..."
+              sleep 10
+            done
+
+            if [ "$HEALTH_OK" = false ]; then
+              echo "Health check fallido, revirtiendo a $PREVIOUS_COMMIT..."
+              git checkout $PREVIOUS_COMMIT
+              docker compose down
+              docker compose up --build -d
+              echo "Rollback completado"
+              exit 1
+            fi
+
+            echo "Deploy exitoso"
 
       - name: Health check post-deploy
         uses: appleboy/ssh-action@v1.0.3

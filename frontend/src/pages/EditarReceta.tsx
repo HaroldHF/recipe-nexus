@@ -3,7 +3,7 @@ import { useEditarReceta } from "../hooks/useEditarReceta";
 import { FormNuevaReceta } from "../components/NuevaReceta/FormNuevaReceta";
 import { PageLoader } from "../components/PageLoader";
 import { buildRoute, ROUTES } from "../constants/routes";
-import type { RecetaFormDTO } from "../types";
+import type { RecetaPayload } from "../types";
 
 export function EditarReceta() {
   const { id } = useParams<{ id: string }>();
@@ -13,15 +13,20 @@ export function EditarReceta() {
   if (recetaQuery.isLoading) return <PageLoader />;
   if (recetaQuery.isError || !recetaQuery.data) {
     return (
-      <div className="container" style={{ padding: "80px 0", textAlign: "center" }}>
-        <div className="empty"><div className="serif">Receta no encontrada</div></div>
+      <div
+        className="container"
+        style={{ padding: "80px 0", textAlign: "center" }}
+      >
+        <div className="empty">
+          <div className="serif">Receta no encontrada</div>
+        </div>
       </div>
     );
   }
 
   const receta = recetaQuery.data;
 
-  function handleSubmit(data: RecetaFormDTO) {
+  function handleSubmit(data: RecetaPayload) {
     editarMutation.mutate(data, {
       onSuccess: () => navigate(buildRoute.detalle(id ?? "")),
     });
