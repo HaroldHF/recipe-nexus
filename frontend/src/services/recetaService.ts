@@ -1,8 +1,15 @@
 import api from "../api/axiosConfig";
-import type { Receta, RecetaFormDTO, Comentario, ComentarioFormDTO } from "../types";
+import type {
+  Receta,
+  RecetaPayload,
+  Comentario,
+  ComentarioFormDTO,
+} from "../types";
 
 export async function getRecetas(): Promise<Receta[]> {
-  const res = await api.get<Receta[] | { recetas?: Receta[]; data?: Receta[] }>("/recetas");
+  const res = await api.get<Receta[] | { recetas?: Receta[]; data?: Receta[] }>(
+    "/recetas",
+  );
   const payload = res.data;
 
   // La API puede responder un array plano `[...]` o un objeto envoltorio
@@ -19,12 +26,15 @@ export async function getRecetaById(id: string): Promise<Receta> {
   return res.data;
 }
 
-export async function crearReceta(data: RecetaFormDTO): Promise<Receta> {
+export async function crearReceta(data: RecetaPayload): Promise<Receta> {
   const res = await api.post<Receta>("/recetas", data);
   return res.data;
 }
 
-export async function editarReceta(id: string, data: RecetaFormDTO): Promise<Receta> {
+export async function editarReceta(
+  id: string,
+  data: RecetaPayload,
+): Promise<Receta> {
   const res = await api.put<Receta>(`/recetas/${id}`, data);
   return res.data;
 }
@@ -38,8 +48,14 @@ export async function getComentarios(recetaId: string): Promise<Comentario[]> {
   return res.data;
 }
 
-export async function crearComentario(recetaId: string, data: ComentarioFormDTO): Promise<Comentario> {
-  const res = await api.post<Comentario>(`/recetas/${recetaId}/comentarios`, data);
+export async function crearComentario(
+  recetaId: string,
+  data: ComentarioFormDTO,
+): Promise<Comentario> {
+  const res = await api.post<Comentario>(
+    `/recetas/${recetaId}/comentarios`,
+    data,
+  );
   return res.data;
 }
 
