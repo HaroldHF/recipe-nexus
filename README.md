@@ -3,7 +3,7 @@
 Aplicación full-stack para gestión y descubrimiento de recetas. Permite registrarse, publicar recetas con ingredientes y pasos, comentar las de otros usuarios y filtrar por categoría.
 
 ## Tabla de contenidos
-
+- [URL publicas](#url-publicas)
 - [Arquitectura](#arquitectura)
 - [Stack tecnológico](#stack-tecnológico)
 - [Estructura del repositorio](#estructura-del-repositorio)
@@ -17,6 +17,11 @@ Aplicación full-stack para gestión y descubrimiento de recetas. Permite regist
 
 ---
 
+## URL PUBLICAS
+- APP
+- API
+
+  
 ## Arquitectura
 
 <img width="1169" height="827" alt="recipe-nexus-architecture drawio (1)" src="https://github.com/user-attachments/assets/c644dde1-25a7-4fd1-b016-af9292877f99" />
@@ -116,6 +121,7 @@ recipe-nexus/
 ```
 
 ---
+
 
 ## Requisitos previos
 
