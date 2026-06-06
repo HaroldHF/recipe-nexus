@@ -193,6 +193,23 @@ export const ComentarioFormDTOSchema = z.object({
 export type ComentarioFormDTO = z.infer<typeof ComentarioFormDTOSchema>;
 
 // ---------------------------------------------------------------------------
+// UpdatePerfilDTO
+// ---------------------------------------------------------------------------
+
+export const UpdatePerfilDTOSchema = z.object({
+  nombre: z.string().min(1, "El nombre es requerido").trim(),
+  email: z.string().email("Email inválido").toLowerCase(),
+  avatarUrl: z
+    .string()
+    .url("URL de avatar inválida")
+    .optional()
+    .or(z.literal("")),
+  currentPassword: z.string().optional().or(z.literal("")),
+  newPassword: z.string().optional().or(z.literal("")),
+});
+export type UpdatePerfilDTO = z.infer<typeof UpdatePerfilDTOSchema>;
+
+// ---------------------------------------------------------------------------
 // Utilidad de validación
 // ---------------------------------------------------------------------------
 

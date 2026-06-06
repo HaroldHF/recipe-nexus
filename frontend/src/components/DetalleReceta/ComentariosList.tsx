@@ -1,6 +1,7 @@
 import type { Comentario, Usuario } from "../../types";
 import { TrashIcon, StarIcon } from "../shared/Icons";
 
+
 interface ComentariosListProps {
   comentarios: Comentario[];
   usuarioActualId?: string;
@@ -19,9 +20,11 @@ export function ComentariosList({ comentarios, usuarioActualId, onEliminar }: Co
   return (
     <div className="comments">
       {comentarios.map((c) => {
-        const autor = c.usuarioId as Usuario;
-        const esAutor = autor?._id === usuarioActualId;
-        const initials = autor?.nombre?.split(" ").map((w) => w[0]).slice(0, 2).join("") ?? "?";
+        const autor = typeof c.usuarioId === "object" && c.usuarioId !== null ? (c.usuarioId as Usuario) : null;
+        const esAutor = (autor ? autor._id : c.usuarioId) === usuarioActualId;
+        const initials = autor?.nombre
+          ? autor.nombre.split(" ").map((w: string) => w[0]).slice(0, 2).join("")
+          : "?";
 
         return (
           <div className="c-item" key={c._id}>

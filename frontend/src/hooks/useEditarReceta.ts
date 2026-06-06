@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getRecetaById, editarReceta } from "../services/recetaService";
-import type { RecetaFormDTO } from "../types";
+import type { RecetaPayload } from "../types";
 
 export function useEditarReceta(id: string) {
   const queryClient = useQueryClient();
@@ -12,7 +12,7 @@ export function useEditarReceta(id: string) {
   });
 
   const editarMutation = useMutation({
-    mutationFn: (data: RecetaFormDTO) => editarReceta(id, data),
+    mutationFn: (data: RecetaPayload) => editarReceta(id, data),
     onSuccess: (recetaActualizada) => {
       queryClient.setQueryData(["receta", id], recetaActualizada);
       void queryClient.invalidateQueries({ queryKey: ["recetas"] });

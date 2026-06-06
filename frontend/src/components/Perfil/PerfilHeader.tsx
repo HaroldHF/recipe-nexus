@@ -7,9 +7,11 @@ import { Avatar } from "../shared/Avatar";
 interface PerfilHeaderProps {
   usuario: Usuario;
   totalRecetas: number;
+  valoracionMedia: number;
+  onEditClick: () => void;
 }
 
-export function PerfilHeader({ usuario, totalRecetas }: PerfilHeaderProps) {
+export function PerfilHeader({ usuario, totalRecetas, valoracionMedia, onEditClick }: PerfilHeaderProps) {
   return (
     <>
       {/* Full-bleed cover */}
@@ -28,7 +30,7 @@ export function PerfilHeader({ usuario, totalRecetas }: PerfilHeaderProps) {
           <Link to={ROUTES.NUEVA_RECETA} className="btn btn-ghost">
             <PlusIcon size={16} /> Nueva receta
           </Link>
-          <button className="btn btn-ghost btn-icon" title="Editar perfil">
+          <button className="btn btn-ghost btn-icon" title="Editar perfil" onClick={onEditClick}>
             <EditIcon size={17} />
           </button>
         </div>
@@ -39,11 +41,7 @@ export function PerfilHeader({ usuario, totalRecetas }: PerfilHeaderProps) {
             <div className="k">Recetas</div>
           </div>
           <div className="p-stat">
-            <div className="v">—</div>
-            <div className="k">Seguidores</div>
-          </div>
-          <div className="p-stat">
-            <div className="v">4.8</div>
+            <div className="v">{valoracionMedia > 0 ? valoracionMedia.toFixed(1) : "—"}</div>
             <div className="k">Valoración media</div>
           </div>
         </div>

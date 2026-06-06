@@ -45,3 +45,39 @@ export async function login(data: LoginDto) {
 
   return { token, usuario: toPublicUsuario(usuario) };
 }
+
+export async function updatePerfil(id: string, data: {
+  nombre: string;
+  email: string;
+  avatarUrl?: string;
+  currentPassword?: string;
+  newPassword?: string;
+}) {
+  const usuario = await Usuario.findById(id);
+  if (!usuario) throw new Error("Usuario no encontrado");
+
+  // Si cambia de email, validar que no esté en uso por otro usuario
+  if (data.email !== usuario.email) {
+    const existe = await Usuario.findOne({ email: data.email });
+    if (existe) throw new Error("El email ya está registrado por otro usuario");
+    usuario.email = data.email;
+  }
+
+  usuario.nombre = data.nombre;
+  usuario.avatarUrl = data.avatarUrl ?? "";
+
+  // Si se desea actualizar la contraseña
+  if (data.newPassword) {
+    if (!data.currentPassword) {
+      throw new Error("Debe ingresar la contraseña actual para cambiarla");
+    }
+    const coincide = await bcrypt.compare(data.currentPassword, usuario.password as string);
+    if (!coincide) {
+      throw new Error("La contraseña actual es incorrecta");
+    }
+    usuario.password = await bcrypt.hash(data.newPassword, 10);
+  }
+
+  await usuario.save();
+  return toPublicUsuario(usuario);
+}
