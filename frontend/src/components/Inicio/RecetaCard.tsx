@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Receta, Usuario } from "../../types";
 import { buildRoute } from "../../constants/routes";
-import { ClockIcon, HeartIcon, StarIcon } from "../shared/Icons";
+import { ClockIcon, StarIcon } from "../shared/Icons";
 
 const GRADIENTS: Record<string, string> = {
   Desayuno: "linear-gradient(140deg, #fde9c8, #f9c279)",
@@ -45,12 +45,6 @@ export function RecetaCard({ receta }: RecetaCardProps) {
             <span className="ph-cap">{receta.titulo}</span>
           )}
           <span className="badge">{receta.categoria}</span>
-          <button
-            className="fav"
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-          >
-            <HeartIcon size={17} />
-          </button>
         </div>
       </div>
       <div className="cat-tag">{receta.categoria}</div>

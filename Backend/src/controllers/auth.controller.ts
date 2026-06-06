@@ -30,3 +30,13 @@ export async function me(req: Request, res: Response): Promise<void> {
     res.status(500).json({ message: "Error interno del servidor" });
   }
 }
+
+export async function update(req: Request, res: Response): Promise<void> {
+  try {
+    const usuarioActualizado = await authService.updatePerfil(req.usuario!.id, req.body);
+    res.json({ usuario: usuarioActualizado });
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : "Error al actualizar perfil";
+    res.status(400).json({ message: msg });
+  }
+}

@@ -1372,6 +1372,30 @@ img {
   animation: spin 0.7s linear infinite;
 }
 
+/* ---------- utilities ---------- */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Acciones en la tarjeta de perfil (Editar/Eliminar) */
+.card-actions {
+  opacity: 1 !important; /* Visible por defecto en pantallas táctiles y móviles */
+}
+
+@media (min-width: 768px) {
+  .card-actions {
+    opacity: 0 !important; /* Oculto por defecto en escritorio, se revela al pasar el mouse */
+  }
+  .group:hover .card-actions,
+  .group:focus-within .card-actions {
+    opacity: 1 !important;
+  }
+}
+
 @media (max-width: 920px) {
   .d-grid {
     grid-template-columns: 1fr;
@@ -1392,6 +1416,41 @@ img {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-search {
+    display: none !important;
+  }
+  .p-head {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    margin-top: -62px;
+  }
+  .p-avatar {
+    margin: 0 auto;
+  }
+  .p-info {
+    padding-bottom: 0;
+  }
+  .p-stats {
+    justify-content: center;
+    gap: 20px;
+  }
+  .foot-in {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+  .foot-in .links {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
 @media (max-width: 600px) {
   .grid3,
   .grid2 {
@@ -1412,5 +1471,9 @@ img {
   .ing-row .select,
   .ing-row .row-del {
     display: none;
+  }
+  .row-2,
+  .row-3 {
+    grid-template-columns: 1fr;
   }
 }

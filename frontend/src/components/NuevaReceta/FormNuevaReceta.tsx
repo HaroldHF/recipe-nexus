@@ -47,7 +47,7 @@ export function FormNuevaReceta({
         ? defaultValues.ingredientes
         : [{ nombre: "", cantidad: "", unidad: "g" }],
       pasos: defaultValues?.pasos?.length
-        ? defaultValues.pasos.map((v) => ({
+        ? defaultValues.pasos.map((v: string | { value: string }) => ({
             value: typeof v === "string" ? v : (v as { value: string }).value,
           }))
         : [{ value: "" }],
