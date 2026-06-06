@@ -9,6 +9,10 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    
+    env:
+      PNPM_CONFIG_STRICT_DEP_BUILDS: "false"      
+      PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN: "false" 
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -24,7 +28,7 @@ jobs:
           version: 11
 
       - name: Instalar dependencias del backend
-        run: cd Backend && pnpm install --ignore-workspace --config.strict-dep-builds=false
+        run: cd Backend && pnpm install --ignore-workspace
 
       - name: Correr tests del backend
-        run: cd Backend && pnpm test --no-verify-deps
+        run: cd Backend && pnpm test
