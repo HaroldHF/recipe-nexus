@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import type { Receta, Usuario } from "../../types";
 import { buildRoute } from "../../constants/routes";
 import { ClockIcon, StarIcon } from "../shared/Icons";
+import { getComentarios } from "../../services/recetaService";
 
 const GRADIENTS: Record<string, string> = {
   Desayuno: "linear-gradient(140deg, #fde9c8, #f9c279)",
@@ -35,6 +37,16 @@ interface RecetaCardProps {
 export function RecetaCard({ receta }: RecetaCardProps) {
   const autor = receta.autorId as Usuario;
 
+  const { data: comentarios = [] } = useQuery({
+    queryKey: ["comentarios", receta._id],
+    queryFn: () => getComentarios(receta._id),
+  });
+
+  const valoracionMedia =
+    comentarios.length > 0
+      ? comentarios.reduce((acc, c) => acc + c.calificacion, 0) / comentarios.length
+      : 0;
+
   return (
     <Link to={buildRoute.detalle(receta._id)} className="r-card fade-in">
       <div className="img-wrap">
@@ -62,7 +74,7 @@ export function RecetaCard({ receta }: RecetaCardProps) {
       </div>
       <div className="foot">
         <span className="rate">
-          <StarRow rate={4} /> 4.0
+          <StarRow rate={valoracionMedia} /> {valoracionMedia > 0 ? valoracionMedia.toFixed(1) : "—"}
         </span>
         <span className="author">por {autor?.nombre?.split(" ")[0] ?? "—"}</span>
       </div>
