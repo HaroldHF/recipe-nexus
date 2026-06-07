@@ -18,8 +18,8 @@ Aplicación full-stack para gestión y descubrimiento de recetas. Permite regist
 ---
 
 ## URL PUBLICAS
-- APP
-- API
+- [APP:](https://app.recipe-nexus.xyz/)
+- [API:](https://api.recipe-nexus.xyz/)
 
   
 ## Arquitectura
